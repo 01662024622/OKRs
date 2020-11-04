@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/database/migrations/2020_10_31_145334_create_feedback_review_table.php" />
+    <file url="file://$PROJECT_DIR$/database/migrations/2020_10_31_150447_create_feedback_reviews_table.php" />
+  </component>
+</project>
