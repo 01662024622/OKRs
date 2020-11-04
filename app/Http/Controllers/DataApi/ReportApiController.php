@@ -155,16 +155,16 @@ class ReportApiController extends Controller
             ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
             ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
             ->orderBy('ht10-reviews.created_at', 'desc')
-            ->where('ht10-reviews.created_at', "<", $date);
+            ->where('ht10-reviews.user_status', -1);
         return Datatables::of($data)
             ->addColumn('action', function ($dt) {
-                $html = '<select class="form-control" id="role_' . $dt['id'] . '" onchange="changeStatus(' . $dt['id'] . ')">';
+                $html = '<select class="form-control" id="role_' . $dt['id'] . '" onchange="changeStatus(' . $dt['id'] . ')"';
                 if ($dt['status'] == 1) {
-                    $html .= '<option value="1" selected style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option>';
+                    $html .= 'disabled><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option><option value="1" selected style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
                 } elseif ($dt['status'] == 0) {
-                    $html .= '<option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999" selected>Bác Bỏ</option><option value="0" style="background-color: #E5EB37" disabled selected>Chưa Duyệt</option>';
+                    $html .= '><option value="0" style="background-color: #E5EB37" disabled selected>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
                 } else {
-                    $html .= '<option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999" selected>Bác Bỏ</option><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option>';
+                    $html .= 'disabled><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999" selected>Bác Bỏ</option>';
                 }
 
                 $html .= '</select>';
@@ -310,7 +310,7 @@ class ReportApiController extends Controller
 
     public function status(Request $request, $id)
     {
-        $data = ReviewIprove360::find($id)->update(array('status' => $request->status));
+        $data = Review::find($id)->update(array('status' => $request->status));
         return $data;
     }
 }

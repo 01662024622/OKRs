@@ -95,3 +95,43 @@ $("#add-form").submit(function (e) {
         });
     }
 });
+function setStatus(id) {
+    $('#eid').val(id);
+    var status = $("#feedback_"+id).val();
+    console.log(id)
+    console.log(status)
+    if (status==1) {
+        swal({
+                title: "Bạn chắc chắn chấp thuận phản hồi?",
+                // text: "Bạn sẽ không thể khôi phục lại bản ghi này!!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+                // closeOnConfirm: false,
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "get",
+                        url: "/review/report/"+id+"/edit",
+                        success: function(res)
+                        {
+                            if(!res.error) {
+                                toastr.success('Thành công!');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            toastr.error(thrownError);
+                        }
+                    });
+                } else {
+                    toastr.error("Hủy bỏ thao tác!");
+                }
+            });
+    }
+    if (status==-1) {
+        $('#add-modal').modal('show');
+    }
+}

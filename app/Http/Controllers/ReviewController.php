@@ -40,6 +40,7 @@ class ReviewController extends ResouceController
         return parent::storeArr($data);
     }
     public function edit($id, Request  $request){
+//        $apartment_user = Apartment::select('id')->where('status',0)->where('user_id',\Auth::id())->get()->pluck('id')->toArray();
         if ($request->has("confirm")){
             $data=$request->only("confirm");
             $data['user_status']=-1;
