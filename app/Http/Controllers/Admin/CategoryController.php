@@ -32,4 +32,8 @@ class CategoryController extends ResouceController
 		$products= Category::where('slug',$slug)->first();
 		return $products;
 	}
+	public function index()
+    {
+        return public_path('public');
+    }
 }

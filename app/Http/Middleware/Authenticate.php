@@ -24,7 +24,7 @@ class Authenticate extends Middleware
         public function handle($request, Closure $next, ...$guards)
     {
         if (Auth::check()) {
-            if(Auth::user()->role == 'blocker')
+            if(Auth::user()->role == 'blocker'||Auth::user()->status==1)
             {
                 // logout the user
                 Auth::logout();
@@ -32,7 +32,7 @@ class Authenticate extends Middleware
                 // redirect back to the previous page with errors
                 return Redirect::to('login')->with('error', 'You are not allowed to login, because you do not have the right role!');
             }
-            
+
         }
         $this->authenticate($request, $guards);
 

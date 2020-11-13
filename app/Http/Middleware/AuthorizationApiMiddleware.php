@@ -20,7 +20,7 @@ class AuthorizationApiMiddleware
     {
         if ($request->headers->has('Authorization')) {
             $header = $request->header('Authorization');
-            $user = User::where('authentication', $header)->where("status",0)->first();
+            $user = User::where('authentication', $header)->where("role","<>","blocker")->where("status","0")->first();
             if (is_null($user)) {
                 return response()
                     ->json([

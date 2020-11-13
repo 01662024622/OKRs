@@ -12,18 +12,22 @@ class CustomerController extends Controller
     public function intergration($auth)
     {
         //check Authorization header
-        $user = User::where('authentication', "=", $auth)->first();
+        $user = User::where('authentication', "=", $auth)->where("role","<>","blocker")->where("status","0")->first();
         if (Auth::check()) {
             Auth::logout();
-            Auth::login($user);
         }
-        return view('report_market.intergration', ['auth' => $auth, 'name' => $user['name'], 'customers' => Customer::all()]);
+        if ($user) {
+            Auth::login($user);
+            return view('report_market.intergration', ['auth' => $auth, 'name' => $user['name'], 'customers' => Customer::all()]);
+        }
+        return view("errors.404");
+
     }
 
     public function review360($auth)
     {
         //check Authorization header
-        $user = User::where('authentication', "=", $auth)->where('status', 0)->first();
+        $user = User::where('authentication', "=", $auth)->where("role","<>","blocker")->where("status","0")->first();
         if (Auth::check()) {
             Auth::logout();
         }
@@ -31,7 +35,7 @@ class CustomerController extends Controller
             Auth::login($user);
             return view('report_review.feedback', ['apartment' => $user->apartment->name, "apartments" => Apartment::where("status", 0)->get(),'active' => 'create_review360','group'=>'reports']);
         }
-        return view("404");
+        return view("errors.404");
     }
 
     public function success($auth)

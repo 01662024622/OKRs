@@ -57,7 +57,7 @@
                 <div id="collapsePages1" @if ($group=='manager') class="collapse show" @else class="collapse"
                      @endif aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @if(Auth::user()->role=="admin")
+                        @if(Auth::user()->role=="manager")
                             <a @if ($active=='users') class="collapse-item active" @else class="collapse-item"
                                @endif  href="/users">
                                 <i class="fas fa-fw fa-users"></i>
@@ -89,7 +89,7 @@
                 <div id="collapsePages2" @if ($group=='configuration') class="collapse show" @else class="collapse"
                      @endif aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @if(Auth::user()->role=="admin")
+                        @if(Auth::user()->role=="manager")
                             <a @if ($active=='category') class="collapse-item active" @else class="collapse-item"
                                @endif  href="/categories">
                                 <i class="fas fa-fw fa-users"></i>
@@ -136,7 +136,7 @@
                         </a>
                     @endif
 
-                    @if(Auth::user()->role=="admin")
+                    @if(Auth::id()==47)
                         <a @if ($active=='feedbackBrowser') class="collapse-item active" @else class="collapse-item"
                            @endif  href="/review/feedback/browser" title="Duyệt phản hồi">
                             <i class="fa fa-paper-plane"></i>

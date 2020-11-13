@@ -43,7 +43,7 @@ class CustomerFeedbackController extends ResouceController
         if (!($customer)){
             return view("errors.404");
         }
-        return view("feedback.custmerFeedback",["code"=>$code,"name"=>$customer->Name]);
+        return view("feedback.customerFeedback",["code"=>$code,"name"=>$customer->Name]);
     }
     public function index()
     {

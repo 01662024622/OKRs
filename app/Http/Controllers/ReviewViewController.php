@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\ResouceController;
 use App\Services\ReviewService;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewViewController extends ResouceController
 {
@@ -13,14 +15,15 @@ class ReviewViewController extends ResouceController
         parent::__construct($reviewService, array('active' => 'report_review', 'group' => 'reports'));
 
     }
-
     public function feedbackMe()
     {
         return view("report_review.feedbackme",['active' => 'feedbackme','group'=>'reports']);
     }
+
     public function feedbackApartment(){
         return view("report_review.feedbackApartment",['active' => 'feedbackApartment','group'=>'reports']);
     }
+
     public function feedbackBrowser(){
         return view("report_review.feedbackBrowser",['active' => 'feedbackBrowser','group'=>'reports']);
     }

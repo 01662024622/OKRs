@@ -58,7 +58,7 @@ class ReportApiController extends Controller
 
     public function feedbackMeData()
     {
-        $date = Carbon::today()->subDay(2);
+        $date = Carbon::now()->subDay(2);
         $data = Review::select("ht10-reviews.*",
             DB::raw("(CASE WHEN `ht10-reviews`.user_status = 1 THEN 1 WHEN `ht10-reviews`.created_at < '" . $date . "' THEN 2 WHEN `ht10-reviews`.user_status = -1 THEN -1 ELSE 0 END) as role"))
             ->orderBy('ht10-reviews.updated_at', 'desc')
@@ -70,8 +70,8 @@ class ReportApiController extends Controller
                 if ($dt['role'] == 0) {
                     return '<select class="form-control" id="feedback_'.$dt["id"].'" onchange="setStatus('.$dt["id"].')" name="sellist1">
                                 <option value="0" selected disabled>Chưa duyệt</option>
-                                <option class="bg-info" value="-1">Bác bỏ</option>
                                 <option class="bg-warning" value="1">Chấp thuận</option>
+                                <option class="bg-info" value="-1">Bác bỏ</option>
                               </select>';
                 }
                 if ($dt['role']==1){
@@ -112,8 +112,8 @@ class ReportApiController extends Controller
                 if ($dt['role'] == 0) {
                     return '<select class="form-control" id="feedback_'.$dt["id"].'" onchange="setStatus('.$dt["id"].')" name="sellist1">
                                 <option value="0" selected disabled>Chưa duyệt</option>
-                                <option class="bg-info" value="-1">Bác bỏ</option>
                                 <option class="bg-warning" value="1">Chấp thuận</option>
+                                <option class="bg-info" value="-1">Bác bỏ</option>
                               </select>';
                 }
                 if ($dt['role']==1){
@@ -150,7 +150,6 @@ class ReportApiController extends Controller
         if (Auth::user()->role != "manager") {
             if (Auth::user()->role != "admin") return null;
         }
-        $date = Carbon::now()->subDay(2);
         $data = Review::select("ht10-reviews.*", "apartments.name as apartment", "users.name as user")
             ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
             ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
@@ -160,11 +159,11 @@ class ReportApiController extends Controller
             ->addColumn('action', function ($dt) {
                 $html = '<select class="form-control" id="role_' . $dt['id'] . '" onchange="changeStatus(' . $dt['id'] . ')"';
                 if ($dt['status'] == 1) {
-                    $html .= 'disabled><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option><option value="1" selected style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
+                    $html .= 'disabled><option value="0" disabled>Chưa Duyệt</option><option value="1" selected style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
                 } elseif ($dt['status'] == 0) {
-                    $html .= '><option value="0" style="background-color: #E5EB37" disabled selected>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
+                    $html .= '><option value="0" disabled selected>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999">Bác Bỏ</option>';
                 } else {
-                    $html .= 'disabled><option value="0" style="background-color: #E5EB37" disabled>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999" selected>Bác Bỏ</option>';
+                    $html .= 'disabled><option value="0" disabled>Chưa Duyệt</option><option value="1" style="background-color: #F46D66">Ghi Nhận</option><option value="-1" style="background-color: #57E999" selected>Bác Bỏ</option>';
                 }
 
                 $html .= '</select>';

@@ -24,7 +24,7 @@ class ReportMarketController extends ResouceController
     }
     public function intergration($auth){
         //check Authorization header
-        $user = User::where('authentication',"=",$auth)->first();
+        $user = User::where('authentication',"=",$auth)->where("role","<>","blocker")->where("status","0")->first();
         return view('report_market.intergration',['auth'=>$auth,'name'=>$user['name']]);
     }
 
@@ -49,7 +49,8 @@ class ReportMarketController extends ResouceController
 		if (Auth::check()){
 		    $data["user_id"]= Auth::id();
         }else{
-		    $user = User::where('authentication',$request->header('Authorization'))->first();
+		    $user = User::where('authentication',$request->header('Authorization'))->where("role","<>","blocker")->where("status","0")->first();
+		    $user = User::where('authentication',$request->header('Authorization'))->where("role","<>","blocker")->where("status","0")->first();
 		    $data["user_id"]=$user->id;
         }
 		// check image and put job to driver

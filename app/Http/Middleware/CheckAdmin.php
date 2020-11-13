@@ -19,12 +19,12 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if(Auth::user()->role == 'admin')
+            if(Auth::user()->role == 'manager')
             {
                 return $next($request);
-                
+
             }
-            
+
         }
          // logout the user
         Auth::logout();

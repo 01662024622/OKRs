@@ -45,9 +45,12 @@ Route::get('/customer/feedback/link/{code}', 'CustomerFeedbackController@indexCo
 
 
 Route::get('/review/feedback', 'ReviewViewController@feedbackMe');
+Route::get('/review/feedback/auth/{auth}', 'Authentication\FeedbackViewController@feedbackMeAuth');
 Route::get('/review/feedback/apartment', 'ReviewViewController@feedbackApartment');
+Route::get('/review/feedback/apartment/auth/{auth}', 'Authentication\FeedbackViewController@feedbackApartmentAuth');
 Route::get('/review/feedback/manager', 'ReviewViewController@feedbackManager');
 Route::get('/review/feedback/browser', 'ReviewViewController@feedbackBrowser');
+Route::get('/review/feedback/browser/{auth}', 'Authentication\FeedbackViewController@feedbackAuthBrowser');
 Route::get('/review/warehouse/report', 'ReviewViewController@warehouse');
 Route::get('/review/warehouse/manager/report', 'ReviewViewController@warehouseManager');
 Route::get('/review/public/relationship/report', 'ReviewViewController@publicRelationship');
@@ -62,7 +65,7 @@ Route::post('/feedback/warehouse', 'FeedbackWareHouseController@store');
 Route::get('/category/{slug}', 'HomeController@category');
 // Route::get('/profile', 'CustomerController@profile');
 
- Route::resource('categories', 'Admin\CategoryController');
+Route::resource('categories', 'Admin\CategoryController');
 
 
 
@@ -88,9 +91,7 @@ Route::group(['prefix' => 'api/v1'], function() {
 // Set Status group
 
 Route::group(['prefix' => 'api/status'], function() {
-
 	Route::get('categories/{id}', 'status\StatusController@categories')->name('categories.api.status');
-
 	Route::post('users/{id}', 'DataApi\UserApiController@status')->name('users.api.status');
 	Route::post('review/{id}', 'DataApi\ReportApiController@status')->name('review.api.status');
 
