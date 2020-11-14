@@ -35,40 +35,42 @@ class ReviewController extends ResouceController
         $data["create_by"] = Auth::id();
         if ($request->hasFile('image')) {
             $name = time() . "-" . $data['create_by'] . "." . $request->image->getClientOriginalExtension();
-            $request->image->storeAs('/public', $name);
-            $data['image'] = "/public/storage/" . $name;
+            $request->image->move(public_path('storage'), $name);
+            $data['image'] = '/public/storage/' . $name;
         }
         if ($data['user_id'] > 0) {
             $data_post = $this->getBody($data['user_id'], "http://crm.htauto.vn/review/feedback/auth/",
                 "Đã có feedback về  cá nhân bạn");
             $result=$this->createTaskFW($data_post);
-            return $result;
+            $data['task_id']=$result;
         } else {
             $apartment = Apartment::find($data['apartment_id']);
             $data_post = $this->getBody($apartment['user_id'], "http://crm.htauto.vn/review/feedback/apartment/auth/",
                 "Đã có feedback về  phòng ban mà bạn quản lý");
-            $this->createTaskFW($data_post);
+            $result=$this->createTaskFW($data_post);
+            $data['task_id']=$result;
         }
-//        return $data_post;
         return parent::storeArr($data);
     }
 
     public function edit($id, Request $request)
     {
-//        $apartment_user = Apartment::select('id')->where('status',0)->where('user_id',\Auth::id())->get()->pluck('id')->toArray();
+        $review = Review::where("id", $id)->where("user_status", 0)->first();
+        $this->createTaskFW('{"status": "Hoàn thành"}',
+            'https://work.fastwork.vn:6014/Job/'.$review->task_id.'/WorkProgress/5efef3dd5a51cf1c10fab0e4',
+            'PUT');
         if ($request->has("confirm")) {
             $data = $request->only("confirm");
-            $review = Review::where("id", $id)->where("user_status", 0)->first();
             $data['user_status'] = -1;
             $data_post = $this->getBody(47, "http://crm.htauto.vn/review/feedback/browser/",
                 "Đã có nhân sự/TP phản đối feedback về bản thân/Phòng ban mình");
-            $this->createTaskFW($data_post);
-            $review = $review->update($data);
-            return $review;
+            $data["browser_task_id"]=$this->createTaskFW($data_post);
+            $result = $review->update($data);
+            return $result;
         } else {
             $data['user_status'] = 1;
-            $review = Review::where("id", $id)->where("user_status", 0)->first()->update($data);
-            return $review;
+            $result = $review->update($data);
+            return $result;
         }
     }
 
@@ -111,11 +113,11 @@ class ReviewController extends ResouceController
             "urgent":false}';
     }
 
-    private function createTaskFW($data)
+    private function createTaskFW($data,$url='https://work.fastwork.vn:6014/Task/5efef3dd5a51cf1c10fab0e4',$method="POST")
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://work.fastwork.vn:6014/Task/5efef3dd5a51cf1c10fab0e4');
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HEADER, true);
@@ -140,12 +142,10 @@ class ReviewController extends ResouceController
         $response = curl_exec($curl);
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $body = substr($response, $header_size);
-        var_dump(json_decode($body)->task[0]->_id);
-        return "";
         curl_close($curl);
-        if ($result['result']) {
-            return $result['task'];
-        }
+        if (json_decode($body)->result&&$method=='POST'){
+            return json_decode($body)->task[0]->_id;
+        }else return null;
     }
 
 }

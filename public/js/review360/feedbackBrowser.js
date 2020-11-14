@@ -91,6 +91,7 @@ function changeStatus(id){
                 });
             } else {
                 toastr.error("Hủy bỏ thao tác!");
+                $('#role_'+id).val(0);
             }
         });
 };

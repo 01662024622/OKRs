@@ -154,7 +154,7 @@ class ReportApiController extends Controller
             ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
             ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
             ->orderBy('ht10-reviews.created_at', 'desc')
-            ->where('ht10-reviews.user_status', -1);
+            ->where('ht10-reviews.user_status', '<',0);
         return Datatables::of($data)
             ->addColumn('action', function ($dt) {
                 $html = '<select class="form-control" id="role_' . $dt['id'] . '" onchange="changeStatus(' . $dt['id'] . ')"';
@@ -309,7 +309,45 @@ class ReportApiController extends Controller
 
     public function status(Request $request, $id)
     {
-        $data = Review::find($id)->update(array('status' => $request->status));
+        $data = Review::find($id);
+        $this->createTaskFW('{"status": "Hoàn thành"}',
+            'https://work.fastwork.vn:6014/Job/'.$data->browser_task_id.'/WorkProgress/5efef3dd5a51cf1c10fab0e4',
+            'PUT');
+        $data->update(array('status' => $request->status));
         return $data;
+    }
+    private function createTaskFW($data,$url='https://work.fastwork.vn:6014/Task/5efef3dd5a51cf1c10fab0e4',$method="POST")
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, true);
+        curl_setopt($curl, CURLOPT_ENCODING, 'UTF-8');
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Accept: */*',
+            'Authorization: Basic dGhhbmd2dUBodGF1dG86N2Q1NzQ0YTI1NjM1MDE2Zjk4MzEyNjE1YWQyZWQzMzI=',
+            'Content-Length: ' . strlen($data),
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36',
+            'Accept-Language: en-US,en;q=0.9,vi;q=0.8',
+            'Referer: https://app.fastwork.vn',
+            'Origin: https://app.fastwork.vn',
+            'Host: work.fastwork.vn:6014',
+            'Connection: keep-alive',
+            'Accept-Encoding: gzip, deflate, br',
+            'Content-Type: application/json',
+            'x-fw: ' . (explode(" ", microtime())[1] * 1000),
+            'Sec-Fetch-Dest: empty',
+            'Sec-Fetch-Mode: cors',
+            'Sec-Fetch-Site: same-site',
+        ));
+        $response = curl_exec($curl);
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $body = substr($response, $header_size);
+        curl_close($curl);
+        if (json_decode($body)->result&&$method=='POST'){
+            return json_decode($body)->task[0]->_id;
+        }else return null;
     }
 }

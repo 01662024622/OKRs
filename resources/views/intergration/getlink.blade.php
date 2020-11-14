@@ -88,6 +88,6 @@
 <script src="{{asset('/js/jquery.validate.min.js')}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
-<script src="{{ asset('js/review360/intergration.js') }}"></script>
+<script src="{{ asset('js/review360/intergration-link.js') }}"></script>
 </body>
 </html>

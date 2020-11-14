@@ -121,6 +121,7 @@ function setStatus(id) {
                             if(!res.error) {
                                 toastr.success('Thành công!');
                             }
+                            dataTable.ajax.reload(null, false);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             toastr.error(thrownError);
@@ -128,10 +129,12 @@ function setStatus(id) {
                     });
                 } else {
                     toastr.error("Hủy bỏ thao tác!");
+                    $("#feedback_" + id).val(0);
                 }
             });
     }
     if (status==-1) {
         $('#add-modal').modal('show');
+        $("#feedback_" + id).val(0);
     }
 }

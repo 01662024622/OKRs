@@ -10,7 +10,7 @@ $("#add-form").submit(function(e){
     code: {
       required: true,
       maxlength: 24,
-      minlength: 10
+      minlength: 2
     }
   },
   messages: {
@@ -32,7 +32,7 @@ $("#add-form").submit(function(e){
       processData: false,
       contentType: false,
       success: function(response) {
-      	
+
      }, error: function (xhr, ajaxOptions, thrownError) {
       toastr.error(thrownError);
     },

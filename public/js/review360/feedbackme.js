@@ -31,7 +31,7 @@ var dataTable = $('#users-table').DataTable({
         {data: 'image', name: 'image'},
         {data: 'created_at', name: 'created_at'},
         {data: 'confirm', name: 'confirm'},
-    {data: 'action', name: 'action'},
+        {data: 'action', name: 'action'},
     ],
     oLanguage: {
         "sProcessing": "Đang xử lý...",
@@ -73,7 +73,7 @@ $("#add-form").submit(function (e) {
     submitHandler: function (form) {
         var formData = new FormData(form);
         $.ajax({
-            url: "/review/report/"+$('#eid').val()+"/edit?confirm="+$("#confirm").val(),
+            url: "/review/report/" + $('#eid').val() + "/edit?confirm=" + $("#confirm").val(),
             type: form.method,
             data: formData,
             dataType: 'json',
@@ -92,12 +92,13 @@ $("#add-form").submit(function (e) {
         });
     }
 });
+
 function setStatus(id) {
     $('#eid').val(id);
-    var status = $("#feedback_"+id).val();
+    var status = $("#feedback_" + id).val();
     console.log(id)
     console.log(status)
-    if (status==1) {
+    if (status == 1) {
         swal({
                 title: "Bạn chắc chắn chấp thuận phản hồi?",
                 // text: "Bạn sẽ không thể khôi phục lại bản ghi này!!",
@@ -108,14 +109,14 @@ function setStatus(id) {
                 confirmButtonText: "Có",
                 // closeOnConfirm: false,
             },
-            function(isConfirm) {
+            function (isConfirm) {
                 if (isConfirm) {
                     $.ajax({
                         type: "get",
-                        url: "/review/report/"+id+"/edit",
-                        success: function(res)
-                        {
-                            if(!res.error) {
+                        url: "/review/report/" + id + "/edit",
+                        success: function (res) {
+                            dataTable.ajax.reload(null, false);
+                            if (!res.error) {
                                 toastr.success('Thành công!');
                             }
                         },
@@ -125,10 +126,13 @@ function setStatus(id) {
                     });
                 } else {
                     toastr.error("Hủy bỏ thao tác!");
+                    $("#feedback_" + id).val(0);
                 }
             });
     }
-    if (status==-1) {
+    if (status == -1) {
         $('#add-modal').modal('show');
+        $("#feedback_" + id).val(0);
     }
 }
+
