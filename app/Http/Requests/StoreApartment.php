@@ -24,7 +24,7 @@ class StoreApartment extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'exists:App\Apartment,id|max:20',
+            'id' => 'exists:App\Model\HT20\Apartment,id|max:20',
             'code' => 'required|max:10',
             'description' => 'max:255',
         ];

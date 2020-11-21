@@ -1,97 +1,257 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>HTAuto</title>
-  <style type="text/css"> 
-        html { 
-            overflow: auto; 
-        } 
-          
-        html, 
-        body, 
-        div, 
-        iframe { 
-            margin: 0px; 
-            padding: 0px; 
-            height: 100%; 
-            border: none; 
-        } 
-          
-        iframe { 
-            display: block; 
-            width: 100%; 
-            border: none; 
-            overflow-y: auto; 
-            overflow-x: hidden; 
-        } 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Sortable - Display as grid</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        #sortable > li {
+            margin: 15px;
+            padding: 1px;
+            float: left;
+            width: 16%;
+            height: 300px;
+            font-size: 4em;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        #sortable_sub {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        #sortable_sub > li {
+            margin: 0 3px 3px 3px;
+            padding: 0.4em;
+            padding-left: 1.5em;
+            font-size: 14px;
+            min-height: 20px
+        }
+
+        #sortable_sub > li > span {
+            position: absolute;
+            margin-left: 1.3em;
+        }
     </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-</head> 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#sortable").sortable({
+                placeholder: "ui-state-highlight"
+            });
+            $("#sortable").disableSelection();
+            $("#sortable_sub").sortable({
+                placeholder: "ui-state-highlight",
+                start: function (e, ui) {
+                    ui.placeholder.height(ui.item.height());
+                },
+            });
+            $("#sortable_sub").disableSelection();
+            $(".portlet-toggle").on("click", function () {
+                var icon = $(this);
+                icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+                icon.closest(".portlet").find(".portlet-content").toggle();
+            });
+        });
+    </script>
+</head>
 <body>
-<button onclick="openFullscreen();">Open Video in Fullscreen Mode</button>
-<div id="xxx" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-interval="20000">
-        <video class="video-fluid" autoplay loop muted>
-        <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
-      </video>
-    </div>
-    <div class="carousel-item" data-interval="3000">
-      <img class="d-block w-100" src="https://www.publicdomainpictures.net/pictures/320000/velka/background-image.png" alt="Second slide">
-    </div>
-    <div class="carousel-item" data-interval="3000">
-      <img class="d-block w-100"  src="https://static01.nyt.com/images/2019/11/05/science/28TB-SUNSET1/merlin_163473282_fe17fc6b-78b6-4cdd-b301-6f63e6ebdd7a-superJumbo.jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+
+<ul id="sortable">
+    <li class="ui-state-default">
+        <div class="portlet-header ui-widget-header ui-corner-all">Shopping <span
+                class='ui-icon ui-icon-grip-dotted-vertical'></span>
+        </div>
+        <ul id="sortable_sub">
+            <li class="ui-state-default">1 <br><br><br>x</li>
+            <li class="ui-state-default">2</li>
+            <li class="ui-state-default">3</li>
+            <li class="ui-state-default">4</li>
+            <li class="ui-state-default">5</li>
+            <li class="ui-state-default">6</li>
+            <li class="ui-state-default">7</li>
+            <li class="ui-state-default">8</li>
+            <li class="ui-state-default">9</li>
+            <li class="ui-state-default">10</li>
+            <li class="ui-state-default">11</li>
+            <li class="ui-state-default">12</li>
+        </ul>
+    </li>
+    <li class="ui-state-default">2</li>
+    <li class="ui-state-default">3</li>
+    <li class="ui-state-default">4</li>
+    <li class="ui-state-default">5</li>
+    <li class="ui-state-default">6</li>
+    <li class="ui-state-default">7</li>
+    <li class="ui-state-default">8</li>
+    <li class="ui-state-default">9</li>
+    <li class="ui-state-default">10</li>
+    <li class="ui-state-default">11</li>
+    <li class="ui-state-default">12</li>
+</ul>
+
 
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script type="text/javascript">
-var t;
-
-var start = $('#xxx').find('.active').attr('data-interval');
-t = setTimeout("$('#xxx').carousel({interval: 1000});", start-1000);
-
-$('#xxx').on('slid.bs.carousel', function () {  
-     clearTimeout(t);  
-     var duration = $(this).find('.active').attr('data-interval');
-    
-     $('#xxx').carousel('pause');
-     t = setTimeout("$('#xxx').carousel();", duration-1000);
-})
-
-</script>
-<script>
-var elem = document.getElementById("xxx");
-function openFullscreen() {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) { /* Firefox */
-    elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE/Edge */
-    elem.msRequestFullscreen();
-  }
-}
-</script>
 </html>
-</html>
+
+
+{{--    <!doctype html>--}}
+{{--<html lang="en">--}}
+{{--<head>--}}
+{{--    <meta charset="utf-8">--}}
+{{--    <meta name="viewport" content="width=device-width, initial-scale=1">--}}
+{{--    <title>jQuery UI Sortable - Portlets</title>--}}
+{{--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--}}
+{{--    <style>--}}
+{{--        body {--}}
+{{--            min-width: 520px;--}}
+{{--        }--}}
+
+
+{{--        .portlet {--}}
+{{--            margin: 0 1em 1em 0;--}}
+{{--            padding: 0.3em;--}}
+{{--            width: 25%;--}}
+{{--        }--}}
+
+{{--        .portlet-header {--}}
+{{--            padding: 0.2em 0.3em;--}}
+{{--            margin-bottom: 0.5em;--}}
+{{--            position: relative;--}}
+{{--        }--}}
+
+{{--        .portlet-toggle {--}}
+{{--            position: absolute;--}}
+{{--            top: 50%;--}}
+{{--            right: 0;--}}
+{{--            margin-top: -8px;--}}
+{{--        }--}}
+
+{{--        .portlet-content {--}}
+{{--            padding: 0.4em;--}}
+{{--        }--}}
+
+{{--        .portlet-placeholder {--}}
+{{--            border: 1px dotted black;--}}
+{{--            margin: 0 1em 1em 0;--}}
+{{--            height: 50px;--}}
+{{--        }--}}
+
+{{--        #sortable_sub {--}}
+{{--            list-style-type: none;--}}
+{{--            margin: 0;--}}
+{{--            padding: 0;--}}
+{{--            width: 100%;--}}
+{{--        }--}}
+
+{{--        #sortable_sub > li {--}}
+{{--            margin: 0 3px 3px 3px;--}}
+{{--            padding: 0.4em;--}}
+{{--            padding-left: 1.5em;--}}
+{{--            font-size: 14px;--}}
+{{--            min-height: 20px--}}
+{{--        }--}}
+
+{{--        #sortable_sub > li > span {--}}
+{{--            position: absolute;--}}
+{{--            margin-left: 1.3em;--}}
+{{--        }--}}
+{{--    </style>--}}
+{{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+{{--    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
+{{--    <script>--}}
+{{--        $(function () {--}}
+{{--            $(".column").sortable({--}}
+{{--                scrollSensitivity: true,--}}
+{{--                connectWith: ".column",--}}
+{{--                handle: ".portlet-header",--}}
+{{--                cancel: ".portlet-toggle",--}}
+{{--                placeholder: "portlet-placeholder ui-corner-all"--}}
+{{--            });--}}
+
+
+{{--            $(".portlet-toggle").on("click", function () {--}}
+{{--                var icon = $(this);--}}
+{{--                icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");--}}
+{{--                icon.closest(".portlet").find(".portlet-content").toggle();--}}
+{{--            });--}}
+
+{{--            $("#sortable_sub").sortable({--}}
+{{--                connectWith: ".column",--}}
+{{--                start: function(e, ui){--}}
+{{--                    ui.placeholder.height(ui.item.height());--}}
+{{--                },--}}
+{{--                placeholder: "ui-state-highlight",--}}
+{{--            });--}}
+{{--            $("#sortable_sub").disableSelection();--}}
+
+{{--        });--}}
+{{--    </script>--}}
+{{--</head>--}}
+{{--<body>--}}
+{{--<div class="column">--}}
+
+{{--    <div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">--}}
+{{--        <div class="portlet-header ui-widget-header ui-corner-all">Feeds <span--}}
+{{--                class='ui-icon ui-icon-minusthick portlet-toggle'></span></div>--}}
+{{--        <div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>--}}
+{{--    </div>--}}
+
+{{--    <div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">--}}
+{{--        <div class="portlet-header ui-widget-header ui-corner-all">News <span--}}
+{{--                class='ui-icon ui-icon-minusthick portlet-toggle'></span></div>--}}
+{{--        <div class="portlet-content">--}}
+{{--            Lorem ipsum dolor sit amet, consectetuer adipiscing elit--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+
+{{--    <div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">--}}
+{{--        <div class="portlet-header ui-widget-header ui-corner-all">Shopping <span--}}
+{{--                class='ui-icon ui-icon-minusthick portlet-toggle'></span></div>--}}
+{{--        <div class="portlet-content">--}}
+{{--            <ul id="sortable_sub">--}}
+{{--                <li class="ui-state-default">1 <br><br><br>x</li>--}}
+{{--                <li class="ui-state-default">2</li>--}}
+{{--                <li class="ui-state-default">3</li>--}}
+{{--                <li class="ui-state-default">4</li>--}}
+{{--                <li class="ui-state-default">5</li>--}}
+{{--                <li class="ui-state-default">6</li>--}}
+{{--                <li class="ui-state-default">7</li>--}}
+{{--                <li class="ui-state-default">8</li>--}}
+{{--                <li class="ui-state-default">9</li>--}}
+{{--                <li class="ui-state-default">10</li>--}}
+{{--                <li class="ui-state-default">11</li>--}}
+{{--                <li class="ui-state-default">12</li>--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+
+{{--    <div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">--}}
+{{--        <div class="portlet-header ui-widget-header ui-corner-all">Links <span--}}
+{{--                class='ui-icon ui-icon-minusthick portlet-toggle'></span></div>--}}
+{{--        <div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>--}}
+{{--    </div>--}}
+
+{{--    <div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">--}}
+{{--        <div class="portlet-header ui-widget-header ui-corner-all">Images <span--}}
+{{--                class='ui-icon ui-icon-minusthick portlet-toggle'></span></div>--}}
+{{--        <div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>--}}
+{{--    </div>--}}
+
+{{--</div>--}}
+{{--</body>--}}
+{{--</html>--}}

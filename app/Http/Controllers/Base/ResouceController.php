@@ -1,11 +1,7 @@
 <?php
 namespace App\Http\Controllers\Base;
 
-use App\Apartment;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Repositories\RepositoryInterface;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use App\Services\Service;
 
@@ -18,8 +14,6 @@ class ResouceController extends Controller
 		foreach($arr as $key => $val) {
 			View::share($key,$val);
 		}
-		$apartment = Apartment::where("user_id",Auth::id())->where("status",0)->get();
-		View::share("apartment_user",$apartment);
 		$this->table=$arr['active'];
 	}
     protected function index(){

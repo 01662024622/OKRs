@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Apartment;
+use App\Model\HT20\Apartment;
 
 class AparmentMiddleware
 {
@@ -16,7 +16,7 @@ class AparmentMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (is_null(Apartment::where('name',$request->name)->orWhere('code',$request->code)->get())) {   
+        if (is_null(Apartment::where('name',$request->name)->orWhere('code',$request->code)->get())) {
           return $next($request);
         }
         return response()

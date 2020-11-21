@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\DataApi;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Model\HT20\User;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;

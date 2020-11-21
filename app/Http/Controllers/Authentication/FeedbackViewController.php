@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Http\Request;
+use App\Model\HT20\User;
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackViewController extends Controller

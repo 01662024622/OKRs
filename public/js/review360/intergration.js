@@ -66,7 +66,7 @@ $('#submit').on('click', function () {
         processData: false,
         contentType: false,
         success: function (response, textStatus, request) {
-            //  document.location.replace('/review/report');
+             document.location.replace('/review/report');
         }, error: function (xhr, ajaxOptions, thrownError) {
             toastr.error(thrownError);
         },
@@ -162,7 +162,7 @@ $('#submit-feedback').on('click', function () {
         success: function (response, textStatus, request) {
             document.location.replace('/review/feedback/customer/report');
         }, error: function (xhr, ajaxOptions, thrownError) {
-            // toastr.error(thrownError);
+            toastr.error(thrownError);
         },
     });
 })
@@ -204,7 +204,7 @@ $('#submit-pr').on('click', function () {
         success: function (response, textStatus, request) {
             document.location.replace('/review/public/relationship/report');
         }, error: function (xhr, ajaxOptions, thrownError) {
-            // toastr.error(thrownError);
+            toastr.error(thrownError);
         },
     });
 })
@@ -273,7 +273,7 @@ $('#submit-wh').on('click', function () {
         success: function (response, textStatus, request) {
             document.location.replace('/review/warehouse/report');
         }, error: function (xhr, ajaxOptions, thrownError) {
-            // toastr.error(thrownError);
+            toastr.error(thrownError);
         },
     });
 

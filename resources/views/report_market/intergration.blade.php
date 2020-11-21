@@ -67,7 +67,7 @@
               <label for="exampleFormControlSelect1">Khách hàng</label>
               <select class="form-control selectpicker" data-live-search="true" id="customer_id" name="customer_id">
                 @foreach ($customers as $customer)
-                <option value="{{ $customer->id }}">{{ $customer->name_follow}}-{{ $customer->supplies_phone_1}}</option>
+                <option value="{{ $customer->Code }}">{{ $customer->Name}}</option>
                 @endforeach
               </select>
             </div>

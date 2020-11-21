@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\DataApi;
 
 use App\Http\Controllers\Controller;
-use App\ReportMarket;
-use App\User;
+use App\Model\HT10\ReportMarket;
+use App\Model\HT20\User;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;

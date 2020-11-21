@@ -24,7 +24,7 @@ class StoreUser extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'exists:App\User,id|max:20',
+            'id' => 'exists:App\Model\HT20\User,id|max:20',
             'name' => 'required|max:24',
             'position' => 'required|max:24',
             'apartment_id' => 'required|numeric',

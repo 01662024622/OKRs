@@ -178,7 +178,10 @@ return [
 
         App\Providers\GoogleDriveServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
-        App\Providers\AdminRepositoryServiceProvider::class
+        App\Providers\AdminRepositoryServiceProvider::class,
+        App\Providers\HT00ServiceProvider::class,
+        App\Providers\HT10ServiceProvider::class,
+        App\Providers\HT20ServiceProvider::class
 
 
     ],

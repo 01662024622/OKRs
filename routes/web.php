@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,59 +16,62 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => false,'request' => false, 'reset' => false]);
 
 
-Route::get('/', 'ReportMarketController@index');
-Route::get('/report/user/{auth}', 'CustomerController@intergration');
-Route::get('/review/user/{auth}', 'CustomerController@review360');
-Route::get('/review/user/success/{auth}', 'CustomerController@success');
+
+Route::get('/report/user/{auth}', 'HT10\CustomerController@intergration');
+Route::get('/review/user/{auth}', 'HT10\CustomerController@review360');
+Route::get('/review/user/success/{auth}', 'HT10\CustomerController@success');
 
 Route::get('/home',
 function (){
     return view("view_infor.dashboard",['active' => 'dashboard', 'group' => '']);
 })->name('home');
+Route::get('/test',
+function (){
+    return view("test");
+})->name('test');
 
 Route::get('/get-link',
     function (){
         return view("intergration.getlink");
     })->name('getlink');
 
-Route::resource('users', 'Admin\UserController');
-Route::resource('apartments', 'Admin\ApartmentController');
-Route::get('profile', 'UserEditController@profile');
-Route::get('change-password', 'UserEditController@password');
-Route::post('change-password', 'UserEditController@changePassword');
-Route::post('user-profile', 'UserEditController@updateProfile');
-Route::resource('report/market', 'ReportMarketController');
-Route::resource('/review/report', 'ReviewController');
-Route::resource('/feedback/report', 'FeedbackController');
+Route::resource('users', 'HT20\UserController');
+Route::resource('apartments', 'HT20\ApartmentController');
 
-Route::resource('/customer/feedback/report', 'CustomerFeedbackController');
-Route::get('/customer/feedback/link/{code}', 'CustomerFeedbackController@indexCode');
+Route::get('profile', 'HT20\UserEditController@profile');
+Route::get('change-password', 'HT20\UserEditController@password');
+Route::post('change-password', 'HT20\UserEditController@changePassword');
+Route::post('user-profile', 'HT20\UserEditController@updateProfile');
 
+Route::resource('report/market', 'HT10\ReportMarketController');
+Route::resource('/review/report', 'HT10\ReviewController');
+Route::resource('/feedback/report', 'HT10\FeedbackController');
+Route::resource('/customer/feedback/report', 'HT10\CustomerFeedbackController');
+Route::post('/feedback/PR', 'HT10\FeedbackPRController@store');
+Route::post('/feedback/warehouse', 'HT10\FeedbackWareHouseController@store');
 
-Route::get('/review/feedback', 'ReviewViewController@feedbackMe');
+Route::get('/customer/feedback/link/{code}', 'HT10\CustomerFeedbackController@indexCode');
+Route::get('/', 'HT10\ReportMarketController@index');
+Route::get('/review/feedback', 'HT10\ReviewViewController@feedbackMe');
 Route::get('/review/feedback/auth/{auth}', 'Authentication\FeedbackViewController@feedbackMeAuth');
-Route::get('/review/feedback/apartment', 'ReviewViewController@feedbackApartment');
+Route::get('/review/feedback/apartment', 'HT10\ReviewViewController@feedbackApartment');
 Route::get('/review/feedback/apartment/auth/{auth}', 'Authentication\FeedbackViewController@feedbackApartmentAuth');
-Route::get('/review/feedback/manager', 'ReviewViewController@feedbackManager');
-Route::get('/review/feedback/browser', 'ReviewViewController@feedbackBrowser');
+Route::get('/review/feedback/manager', 'HT10\ReviewViewController@feedbackManager');
+Route::get('/review/feedback/browser', 'HT10\ReviewViewController@feedbackBrowser');
 Route::get('/review/feedback/browser/{auth}', 'Authentication\FeedbackViewController@feedbackAuthBrowser');
-Route::get('/review/warehouse/report', 'ReviewViewController@warehouse');
-Route::get('/review/warehouse/manager/report', 'ReviewViewController@warehouseManager');
-Route::get('/review/public/relationship/report', 'ReviewViewController@publicRelationship');
-Route::get('/review/public/relationship/manager/report', 'ReviewViewController@publicRelationshipManager');
-Route::get('/review/feedback/customer/report', 'ReviewViewController@feedbackCustomer');
-Route::get('/review/feedback/customer/manager/report', 'ReviewViewController@feedbackCustomerManager');
+Route::get('/review/warehouse/report', 'HT10\ReviewViewController@warehouse');
+Route::get('/review/warehouse/manager/report', 'HT10\ReviewViewController@warehouseManager');
+Route::get('/review/public/relationship/report', 'HT10\ReviewViewController@publicRelationship');
+Route::get('/review/public/relationship/manager/report', 'HT10\ReviewViewController@publicRelationshipManager');
+Route::get('/review/feedback/customer/report', 'HT10\ReviewViewController@feedbackCustomer');
+Route::get('/review/feedback/customer/manager/report', 'HT10\ReviewViewController@feedbackCustomerManager');
 
 
-Route::post('/feedback/PR', 'FeedbackPRController@store');
-Route::post('/feedback/warehouse', 'FeedbackWareHouseController@store');
 
-Route::get('/category/{slug}', 'HomeController@category');
+Route::resource('categories', 'HT00\CategoryController');
+
+//Route::get('/category/{slug}', 'HomeController@category');
 // Route::get('/profile', 'CustomerController@profile');
-
-Route::resource('categories', 'Admin\CategoryController');
-
-
 
 // Get data Table group
 Route::group(['prefix' => 'api/v1'], function() {

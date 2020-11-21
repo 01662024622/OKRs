@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\DataApi;
 
-use App\Apartment;
-use App\Feedback;
-use App\FeedbackPR;
-use App\FeedbackWarehouse;
+use App\Model\HT20\Apartment;
+use App\Model\HT10\Feedback;
+use App\Model\HT10\FeedbackPR;
+use App\Model\HT10\FeedbackWarehouse;
 use App\Http\Controllers\Controller;
 use App\Model\HT10\Review;
-use App\Review360;
 use App\ReviewIprove360;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

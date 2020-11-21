@@ -19,6 +19,7 @@ use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonSerializable;
+use App\Model\ModelTrait;
 
 abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {
@@ -29,7 +30,8 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
         Concerns\HasTimestamps,
         Concerns\HidesAttributes,
         Concerns\GuardsAttributes,
-        ForwardsCalls;
+        ForwardsCalls,
+        ModelTrait;
 
     /**
      * The connection name for the model.
@@ -146,14 +148,14 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
     /**
      * The name of the "created at" column.
      *
-     * @var string
+     * @var string|null
      */
     const CREATED_AT = 'created_at';
 
     /**
      * The name of the "updated at" column.
      *
-     * @var string
+     * @var string|null
      */
     const UPDATED_AT = 'updated_at';
 
@@ -396,6 +398,8 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
      *
      * @param  string  $key
      * @return string
+     *
+     * @deprecated This method is deprecated and will be removed in a future Laravel version.
      */
     protected function removeTableFromKey($key)
     {
