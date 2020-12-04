@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\HT10;
 
 use App\Http\Controllers\Controller;
-use App\Model\HT20\Apartment;
-use App\Model\HT20\B20Customer;
-use App\Model\HT20\User;
+use App\Models\HT20\Apartment;
+use App\Models\HT20\B20Customer;
+use App\Models\HT20\User;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller

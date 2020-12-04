@@ -1,9 +1,9 @@
 <?php
 namespace App\Services\HT20;
 
-use App\Services\Service;
+use App\Services\ServiceInterface;
 
-interface UserService extends Service{
+interface UserService extends ServiceInterface{
 
 }
 

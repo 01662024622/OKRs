@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\HT20;
 
 use App\Http\Controllers\Controller;
-use App\Model\HT20\Apartment;
+use App\Models\HT20\Apartment;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Services\HT20\UserService;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

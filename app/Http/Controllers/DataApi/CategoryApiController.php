@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\DataApi;
 
-use App\Model\HT20\Apartment;
-use App\Model\Category;
+use App\Models\HT20\Apartment;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

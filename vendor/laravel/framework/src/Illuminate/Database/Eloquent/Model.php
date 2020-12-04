@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Eloquent;
 
+use App\Models\ModelTrait;
 use ArrayAccess;
 use Exception;
 use Illuminate\Contracts\Queue\QueueableCollection;
@@ -19,7 +20,6 @@ use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\ForwardsCalls;
 use JsonSerializable;
-use App\Model\ModelTrait;
 
 abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializable, QueueableEntity, UrlRoutable
 {

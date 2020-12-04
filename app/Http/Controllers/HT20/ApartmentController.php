@@ -5,7 +5,7 @@ namespace App\Http\Controllers\HT20;
 use App\Http\Controllers\Base\ResouceController;
 use App\Http\Requests\StoreApartment;
 use App\Services\HT20\ApartmentService;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Illuminate\Support\Facades\View;
 
 class ApartmentController extends ResouceController
@@ -24,6 +24,6 @@ class ApartmentController extends ResouceController
         } else {
             $data = $request->only(['name', 'code', 'description', 'user_id']);
         }
-        return parent::storeArr($data);
+        return parent::storeRequest($request,$data);
     }
 }

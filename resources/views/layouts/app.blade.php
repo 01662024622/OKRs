@@ -68,11 +68,11 @@
                                 <i class="fa fa-building"></i>
                                 <span>Phòng Ban</span>
                             </a>
-                            <a @if ($active=='report_market') class="collapse-item active" @else class="collapse-item"
-                               @endif href="/report/market">
-                                <i class="fa fa-book"></i>
-                                <span>Báo Cáo Thị Trường</span>
-                            </a>
+{{--                            <a @if ($active=='report_market') class="collapse-item active" @else class="collapse-item"--}}
+{{--                               @endif href="/report/market">--}}
+{{--                                <i class="fa fa-book"></i>--}}
+{{--                                <span>Báo Cáo Thị Trường</span>--}}
+{{--                            </a>--}}
                         @endif
                     </div>
                 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\HT10;
 
 use App\Http\Controllers\Base\ResouceController;
 use App\Services\HT10\ReviewService;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewViewController extends ResouceController

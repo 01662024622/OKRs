@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\DataApi;
 
-use App\Model\HT20\Apartment;
-use App\Model\HT10\Feedback;
-use App\Model\HT10\FeedbackPR;
-use App\Model\HT10\FeedbackWarehouse;
+use App\Models\HT20\Apartment;
+use App\Models\HT10\Feedback;
+use App\Models\HT10\FeedbackPR;
+use App\Models\HT10\FeedbackWarehouse;
 use App\Http\Controllers\Controller;
-use App\Model\HT10\Review;
+use App\Models\HT10\Review;
 use App\ReviewIprove360;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -312,7 +312,7 @@ class ReportApiController extends Controller
         $this->createTaskFW('{"status": "Hoàn thành"}',
             'https://work.fastwork.vn:6014/Job/'.$data->browser_task_id.'/WorkProgress/5efef3dd5a51cf1c10fab0e4',
             'PUT');
-        $data->update(array('status' => $request->status));
+        $data->update(array('status' => $request->status,'modify_by'=>Auth::id()));
         return $data;
     }
     private function createTaskFW($data,$url='https://work.fastwork.vn:6014/Task/5efef3dd5a51cf1c10fab0e4',$method="POST")

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\DataApi;
 
-use App\Model\HT20\Apartment;
+use App\Models\HT20\Apartment;
 use App\Http\Controllers\Controller;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use DB;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;

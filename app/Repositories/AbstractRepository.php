@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
@@ -20,14 +22,19 @@ abstract class AbstractRepository implements RepositoryInterface
         return $this->model->where('status', 0)->get();
     }
 
-    public function create(array $data)
+    public function create(Request $data,array $arr)
     {
 //      return $data;
+        $auth = Auth::id();
         try {
-            if (array_key_exists("id", $data)) {
-                return $this->model->find($data["id"])->update($data);
+            if ($data->has("id")) {
+                $update=$data->only($this->model->getUpdate());
+                $update['modify_by']=$auth;
+                return $this->model->find($data->only("id"))->update(array_merge($update,$arr));
             }
-            return $this->model->create($data);
+            $create=$data->only($this->model->getStore());
+            $create['create_by']=$auth;
+            return $this->model->create(array_merge($create,$arr));
         } catch (Exception $e) {
             return response()
                 ->json([
@@ -38,17 +45,17 @@ abstract class AbstractRepository implements RepositoryInterface
         }
     }
 
-    public function update(array $data, $id)
+    public function update(Request $data,int $id)
     {
         return null;
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         return $this->model->find($id)->update(["status" => 1]);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         return $this->model->find($id);
     }

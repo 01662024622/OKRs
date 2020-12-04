@@ -25,10 +25,6 @@ Route::get('/home',
 function (){
     return view("view_infor.dashboard",['active' => 'dashboard', 'group' => '']);
 })->name('home');
-Route::get('/test',
-function (){
-    return view("test");
-})->name('test');
 
 Route::get('/get-link',
     function (){
@@ -43,7 +39,7 @@ Route::get('change-password', 'HT20\UserEditController@password');
 Route::post('change-password', 'HT20\UserEditController@changePassword');
 Route::post('user-profile', 'HT20\UserEditController@updateProfile');
 
-Route::resource('report/market', 'HT10\ReportMarketController');
+//Route::resource('report/market', 'HT10\ReportMarketController');
 Route::resource('/review/report', 'HT10\ReviewController');
 Route::resource('/feedback/report', 'HT10\FeedbackController');
 Route::resource('/customer/feedback/report', 'HT10\CustomerFeedbackController');
@@ -51,7 +47,7 @@ Route::post('/feedback/PR', 'HT10\FeedbackPRController@store');
 Route::post('/feedback/warehouse', 'HT10\FeedbackWareHouseController@store');
 
 Route::get('/customer/feedback/link/{code}', 'HT10\CustomerFeedbackController@indexCode');
-Route::get('/', 'HT10\ReportMarketController@index');
+//Route::get('/', 'HT10\ReportMarketController@index');
 Route::get('/review/feedback', 'HT10\ReviewViewController@feedbackMe');
 Route::get('/review/feedback/auth/{auth}', 'Authentication\FeedbackViewController@feedbackMeAuth');
 Route::get('/review/feedback/apartment', 'HT10\ReviewViewController@feedbackApartment');

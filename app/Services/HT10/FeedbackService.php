@@ -1,9 +1,9 @@
 <?php
 namespace App\Services\HT10;
 
-use App\Services\Service;
+use App\Services\ServiceInterface;
 
-interface FeedbackService extends Service
+interface FeedbackService extends ServiceInterface
 {
 
 }

@@ -4,9 +4,9 @@
 namespace App\Services\HT10;
 
 
-use App\Services\Service;
+use App\Services\ServiceInterface;
 
-interface ReviewService extends Service
+interface ReviewService extends ServiceInterface
 {
 
 }

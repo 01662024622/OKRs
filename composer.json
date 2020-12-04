@@ -9,6 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "01662024622/base-repository-laravel": "9999999-dev",
         "bumbummen99/shoppingcart": "^2.9",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
@@ -18,9 +21,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "nao-pon/flysystem-google-drive": "~1.1",
-        "yajra/laravel-datatables-oracle": "~9.0",
-      "ext-curl": "*",
-        "ext-json": "*"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -32,7 +33,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "discard-changes": true
     },
     "extra": {
         "laravel": {

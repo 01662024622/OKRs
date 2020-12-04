@@ -3,13 +3,14 @@ namespace App\Http\Controllers\Base;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
-use App\Services\Service;
+use App\Services\ServiceInterface;
+use Illuminate\Http\Request;
 
 class ResouceController extends Controller
 {
 	protected $service;
 	protected $table;
-	function __construct(Service $service,array $arr) {
+	function __construct(ServiceInterface $service,array $arr) {
 		$this->service = $service;
 		foreach($arr as $key => $val) {
 			View::share($key,$val);
@@ -28,14 +29,8 @@ class ResouceController extends Controller
 		$data=$this->service->delete($id);
 		return response()->json($data);
 	}
-//	protected function store(Request $request){
-//        $data=$request->all();
-//        return $this->storeArr($data);
-//    }
+	protected function storeRequest(Request $request,array $arr=[]){
+        return $this->service->create($request,$arr);
+    }
 
-    protected function storeArr(array $data) {
-		$respon=$this->service->create($data);
-		return $respon;
-
-	}
 }

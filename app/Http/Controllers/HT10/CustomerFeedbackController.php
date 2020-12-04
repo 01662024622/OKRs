@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\HT10;
 
-use App\Model\HT20\B20Customer;
+use App\Models\HT20\B20Customer;
 use App\Http\Controllers\Base\ResouceController;
 use App\Services\HT10\CustomerFeedbackService;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class CustomerFeedbackController extends ResouceController
     public function store(Request $request)
     {
         $data = $request->only(['customer_code', 'attitude', 'knowledge', 'time', 'cost', 'diversity', 'quality', 'note']);
-         parent::storeArr($data);
+         parent::storeRequest($request,$data);
        return view('feedback.success');
     }
 

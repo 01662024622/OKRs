@@ -3,9 +3,9 @@
 
 namespace App\Services\HT00;
 
-use App\Services\Service;
+use App\Services\ServiceInterface;
 
-interface CategoryService extends Service
+interface CategoryService extends ServiceInterface
 {
 
 }

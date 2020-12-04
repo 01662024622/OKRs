@@ -4,34 +4,16 @@
 namespace App\Services\Impl\HT10;
 
 
-use App\Repositories\Impl\HT10\CustomerFeedbackRepository;
+use App\Repositories\HT10\CustomerFeedbackRepository;
+use App\Services\AbstractService;
 use App\Services\HT10\CustomerFeedbackService;
 
-class CustomerFeedbackServiceImpl implements CustomerFeedbackService
+class CustomerFeedbackServiceImpl extends AbstractService implements CustomerFeedbackService
 {
     protected $repository;
-    public function __construct()
+    public function __construct(CustomerFeedbackRepository $repository)
     {
-        $this->repository = new CustomerFeedbackRepository();
+        parent::__construct($repository);
     }
 
-    public function all() {
-        return $this->repository->all();
-    }
-
-    public function create(array $data){
-        return $this->repository->create($data);
-    }
-
-    public function update(array $data, $id){
-        return null;
-    }
-
-    public function delete($id){
-        $this->repository->delete($id);
-    }
-
-    public function show($id){
-        return $this->repository->show($id);
-    }
 }

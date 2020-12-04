@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\HT10;
 
-use App\Model\HT20\Apartment;
+use App\Models\HT20\Apartment;
 use App\Http\Controllers\Base\ResouceController;
-use App\Model\HT10\Review;
+use App\Models\HT10\Review;
 use App\ReviewIprove360;
 use App\Services\HT10\ReviewService;
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,7 @@ class ReviewController extends ResouceController
             $result=$this->createTaskFW($data_post);
             $data['task_id']=$result;
         }
-        return parent::storeArr($data);
+        return parent::storeRequest($request,$data);
     }
 
     public function edit($id, Request $request)

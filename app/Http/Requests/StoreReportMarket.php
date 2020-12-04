@@ -24,7 +24,7 @@ class StoreReportMarket extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'exists:App\Model\HT20\B20Customer,id|max:20',
+            'customer_id' => 'exists:App\Models\HT20\B20Customer,id|max:20',
             'advisory' => 'required|max:255',
             'feedback' => 'max:255',
             'feedback_other' => 'max:255',
@@ -33,7 +33,7 @@ class StoreReportMarket extends FormRequest
             'scale' => 'required',
             'service' => 'max:255',
             'type_market' => 'max:255',
-            'user_id' => 'exists:App\Model\HT20\User,id|max:20',
+            'user_id' => 'exists:App\Models\HT20\User,id|max:20',
             'date_work' => 'min:7|max:12',
             'image_1' => 'mimes:jpeg,bmp,png,jpg',
             'image_2' => 'mimes:jpeg,bmp,png,jpg',

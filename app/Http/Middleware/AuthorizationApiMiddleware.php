@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Model\HT20\User;
+use App\Models\HT20\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Redirect;

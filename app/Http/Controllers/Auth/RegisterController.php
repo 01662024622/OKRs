@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Model\HT20\User;
-use App\Model\HT20\Apartment;
+use App\Models\HT20\User;
+use App\Models\HT20\Apartment;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +64,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Model\HT20\User
+     * @return \App\Models\HT20\User
      */
     protected function create(array $data)
     {

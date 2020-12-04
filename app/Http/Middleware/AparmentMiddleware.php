@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Model\HT20\Apartment;
+use App\Models\HT20\Apartment;
 
 class AparmentMiddleware
 {

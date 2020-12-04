@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Model\HT20\Apartment;
+use App\Models\HT20\Apartment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

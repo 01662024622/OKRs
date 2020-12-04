@@ -24,10 +24,7 @@ class HT10ServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(
-            ReportMarketService::class,
-            ReportMarketServiceImpl::class
-        );
+
         $this->app->singleton(
             ReviewService::class,
             ReviewServiceImpl::class

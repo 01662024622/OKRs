@@ -17,6 +17,6 @@ class FeedbackController extends ResouceController
     {
         $data = $request->only(['content','order', 'note']);
         $data['user_id'] = Auth::id();
-        return parent::storeArr($data);
+        return parent::storeRequest($request,$data);
     }
 }
