@@ -21,10 +21,8 @@ Route::get('/report/user/{auth}', 'HT10\CustomerController@intergration');
 Route::get('/review/user/{auth}', 'HT10\CustomerController@review360');
 Route::get('/review/user/success/{auth}', 'HT10\CustomerController@success');
 
-Route::get('/home',
-function (){
-    return view("view_infor.dashboard",['active' => 'dashboard', 'group' => '']);
-})->name('home');
+Route::get('/home', 'View\ViewAuthenticationController@home')->name('home');
+Route::get('/', 'View\ViewAuthenticationController@home')->name('home');
 
 Route::get('/get-link',
     function (){
