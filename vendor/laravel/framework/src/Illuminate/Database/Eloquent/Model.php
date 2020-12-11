@@ -2,7 +2,6 @@
 
 namespace Illuminate\Database\Eloquent;
 
-use App\Models\ModelTrait;
 use ArrayAccess;
 use Exception;
 use Illuminate\Contracts\Queue\QueueableCollection;
@@ -30,8 +29,7 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
         Concerns\HasTimestamps,
         Concerns\HidesAttributes,
         Concerns\GuardsAttributes,
-        ForwardsCalls,
-        ModelTrait;
+        ForwardsCalls;
 
     /**
      * The connection name for the model.

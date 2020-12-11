@@ -33,6 +33,8 @@ return array(
     'App\\Http\\Controllers\\HT20\\ApartmentController' => $baseDir . '/app/Http/Controllers/HT20/ApartmentController.php',
     'App\\Http\\Controllers\\HT20\\UserController' => $baseDir . '/app/Http/Controllers/HT20/UserController.php',
     'App\\Http\\Controllers\\HT20\\UserEditController' => $baseDir . '/app/Http/Controllers/HT20/UserEditController.php',
+    'App\\Http\\Controllers\\View\\ViewAuthenticationController' => $baseDir . '/app/Http/Controllers/View/ViewAuthenticationController.php',
+    'App\\Http\\Controllers\\View\\ViewBaseController' => $baseDir . '/app/Http/Controllers/View/ViewBaseController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\AparmentMiddleware' => $baseDir . '/app/Http/Middleware/AparmentMiddleware.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
