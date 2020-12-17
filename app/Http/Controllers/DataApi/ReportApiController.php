@@ -24,7 +24,7 @@ class ReportApiController extends Controller
 
     public function reviewData()
     {
-        $data = Review::select("ht10-reviews.*", "apartments.name as apartment", "users.name as user")
+        $data = Review::select("ht10_reviews.*", "apartments.name as apartment", "users.name as user")
             ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
             ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
             ->orderBy('ht10-reviews.updated_at', 'desc')

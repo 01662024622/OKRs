@@ -13,7 +13,7 @@ class CreateHt10ReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ht10-reviews', function (Blueprint $table) {
+        Schema::create('ht10_reviews', function (Blueprint $table) {
             $table->id();
             $table->string("type")->default("attitude");
             $table->string("name")->nullable();

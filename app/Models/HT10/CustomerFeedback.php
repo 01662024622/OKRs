@@ -9,5 +9,5 @@ class CustomerFeedback extends Model
     protected $fillable = [
         'customer_code', 'attitude', 'knowledge', 'time', 'cost', 'diversity', 'quality', 'note'
     ];
-    protected $table = "customer_feedback";
+    protected $table = "ht10_customer_feedback";
 }

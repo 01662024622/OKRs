@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeedbackWarehouseTable extends Migration
+class CreateHT10FeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateFeedbackWarehouseTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedback_warehouse', function (Blueprint $table) {
+        Schema::create('ht10_feedbacks', function (Blueprint $table) {
             $table->id();
+            $table->string("order");
+            $table->string("content");
+            $table->string("note")->nullable();
             $table->bigInteger("user_id");
-            $table->string("code_product");
-            $table->integer("amount");
+            $table->string("option")->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateFeedbackWarehouseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedback_warehouse');
+        Schema::dropIfExists('ht10_feedbacks');
     }
 }

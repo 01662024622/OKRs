@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewImprove360Table extends Migration
+class CreateHT00MainGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateReviewImprove360Table extends Migration
      */
     public function up()
     {
-        Schema::create('review_improve_360', function (Blueprint $table) {
+        Schema::create('ht00_main_groups', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("improve_360_id");
-            $table->bigInteger("review_360_id");
+            $table->string('code')->unique();
+            $table->string('description')->nullable();
+            $table->integer('status')->default(0);
+            $table->string('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateReviewImprove360Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('review_improve_360');
+        Schema::dropIfExists('ht00_main_groups');
     }
 }

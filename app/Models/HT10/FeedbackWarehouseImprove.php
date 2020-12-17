@@ -9,5 +9,5 @@ class FeedbackWarehouseImprove extends Model
     protected $fillable = [
         'improve_360_id', 'feedback_warehouse_id'
     ];
-    protected $table = "feedback_warehouse_improve";
+    protected $table = "ht10_feedback_warehouse_improve";
 }

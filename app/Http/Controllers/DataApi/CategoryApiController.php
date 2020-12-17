@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\DataApi;
 
-use App\Models\HT20\Apartment;
-use App\Models\Category;
+use App\Models\HT00\Category;
 use App\Http\Controllers\Controller;
-use App\Models\HT20\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -18,7 +16,7 @@ class CategoryApiController extends Controller
     public function anyData(Request $request)
     {
 
-        $data = Category::select('categories.*')->where('status', 0);
+        $data = Category::select('ht00_categories.*')->where('status', 0);
 
         // $products->user;
         return Datatables::of($data)

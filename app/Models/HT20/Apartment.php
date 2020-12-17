@@ -9,7 +9,6 @@ class Apartment extends Model
 	protected $fillable = [
         'name', 'code', 'description','status','user_id','create_by'
     ];
-    protected $table = "apartments";
     protected $fillable_store = [
         'name', 'code', 'description','status','user_id'
     ];
@@ -20,4 +19,5 @@ class Apartment extends Model
     {
         return $this->hasMany('App\Models\HT20\User');
     }
+    protected $table = "ht20_apartments";
 }

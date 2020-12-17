@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReview360Table extends Migration
+class CreateHT10Improve360Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateReview360Table extends Migration
      */
     public function up()
     {
-        Schema::create('review_360', function (Blueprint $table) {
+        Schema::create('ht10_improve_360', function (Blueprint $table) {
             $table->id();
-            $table->string("teamwork");
-            $table->bigInteger("apartment_id")->default(0);
-            $table->bigInteger("user_id")->default(0);
-            $table->bigInteger("create_by");
+            $table->string("content");
             $table->string("note")->nullable();
-            $table->string("option")->nullable();
+            $table->string("plus")->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateReview360Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('review_360');
+        Schema::dropIfExists('ht10_improve_360');
     }
 }

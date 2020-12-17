@@ -9,5 +9,5 @@ class FeedbackPR extends Model
     protected $fillable = [
         'amount','create_by'
     ];
-    protected $table = "feedback_pr";
+    protected $table = "ht10_feedback_pr";
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApartmentsTable extends Migration
+class CreateHT20ApartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateApartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('apartments', function (Blueprint $table) {
+        Schema::create('ht20_apartments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('code')->unique();
@@ -31,6 +31,6 @@ class CreateApartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartments');
+        Schema::dropIfExists('ht20_apartments');
     }
 }

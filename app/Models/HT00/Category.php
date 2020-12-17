@@ -15,5 +15,5 @@ class Category extends Model
     public $fillable_update = [
         'name', 'parent_id'
     ];
-    protected $table = "categories";
+    protected $table = "ht00_categories";
 }

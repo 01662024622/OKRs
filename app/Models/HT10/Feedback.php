@@ -13,5 +13,5 @@ class Feedback extends Model
         'content','order', 'note','user_id'
     ];
     protected $fillable_update = [];
-    protected $table = "feedbacks";
+    protected $table = "ht10_feedbacks";
 }

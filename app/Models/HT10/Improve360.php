@@ -9,5 +9,5 @@ class Improve360 extends Model
     protected $fillable = [
         'content'
     ];
-    protected $table = "improve_360";
+    protected $table = "ht10_improve_360";
 }

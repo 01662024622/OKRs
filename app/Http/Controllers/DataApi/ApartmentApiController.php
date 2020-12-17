@@ -19,7 +19,7 @@ class ApartmentApiController extends Controller
     public function anyData(Request $request)
     {
 
-        $data = Apartment::select('apartments.*')->where('status', 0);
+        $data = Apartment::select('ht20_apartments.*')->where('status', 0);
 
         // $products->user;
         return Datatables::of($data)

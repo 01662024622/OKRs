@@ -18,5 +18,5 @@ class Review extends Model
         'name', 'type', 'apartment_id', 'user_id', 'create_by', 'content', 'image', 'confirm', 'user_status',
         'task_id', 'browser_task_id'
     ];
-    protected $table = "ht10-reviews";
+    protected $table = "ht10_reviews";
 }
