@@ -21,7 +21,7 @@ class UserApiController extends Controller
 
     public function anyData(Request $request)
     {
-        $data = User::select('users.*')->where('status', 0);
+        $data = User::select('ht20_users.*')->where('status', 0);
         $data = $data->where('role', '<>', 'admin')->get();
 
         // $products->user;

@@ -34,7 +34,7 @@
                                 <option value="qc">Quy trình và lỗi sai số liệu</option>
                                 <option value="giao-nhan">Feedback khách hàng</option>
                                 <option value="san-pham">Feedback Kho</option>
-                                <option value="pr">Feedback đối ngoại</option>
+{{--                                <option value="pr">Feedback đối ngoại</option>--}}
                             </select>
                         </div>
                     </div>
@@ -215,25 +215,25 @@
 
 
 
-            <div id="pr" class="report">
-                <div class="container-form">
-                    <div class="card-details">
-                        <h3 class="title">Feedback đối ngoại</h3>
-                        <div class="row">
-                            <div class="form-group col-sm-12">
-                                <label for="card-holder" class="form-label-header">Số lần không phản hồi email*</label>
-                                <input class="text-button" type="number" name="amount-pr" id="amount-pr" placeholder="Câu trả lời của bạn">
-                                <br>
-                                <br>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-form" style="border:none; box-shadow:none;background:none">
-                    <button class="btn btn-primary" type="submit" id="submit-pr" disabled>Gửi</button>
-                </div>
-            </div>
+{{--            <div id="pr" class="report">--}}
+{{--                <div class="container-form">--}}
+{{--                    <div class="card-details">--}}
+{{--                        <h3 class="title">Feedback đối ngoại</h3>--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="form-group col-sm-12">--}}
+{{--                                <label for="card-holder" class="form-label-header">Số lần không phản hồi email*</label>--}}
+{{--                                <input class="text-button" type="number" name="amount-pr" id="amount-pr" placeholder="Câu trả lời của bạn">--}}
+{{--                                <br>--}}
+{{--                                <br>--}}
+{{--                                <br>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="container-form" style="border:none; box-shadow:none;background:none">--}}
+{{--                    <button class="btn btn-primary" type="submit" id="submit-pr" disabled>Gửi</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div id="qc" class="report">
 
                 <div class="container-form">

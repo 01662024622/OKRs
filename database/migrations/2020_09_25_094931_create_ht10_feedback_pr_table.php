@@ -15,9 +15,10 @@ class CreateHT10FeedbackPrTable extends Migration
     {
         Schema::create('ht10_feedback_pr', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("user_id");
             $table->integer("amount");
             $table->string("note")->nullable();
+            $table->bigInteger("create_by")->default(0);
+            $table->bigInteger("modify_by")->nullable();
             $table->timestamps();
         });
     }

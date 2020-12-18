@@ -18,7 +18,11 @@ class CreateHT00CategoriesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug');
             $table->integer('parent_id')->default(0);
+            $table->integer('type')->default(0);
+            $table->string('url')->default('');
             $table->integer('status')->default(0);
+            $table->bigInteger('create_by')->default(0);
+            $table->bigInteger('modify_by')->nullable();
             $table->timestamps();
         });
     }

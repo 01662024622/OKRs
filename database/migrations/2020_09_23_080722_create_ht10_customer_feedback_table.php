@@ -23,6 +23,8 @@ class CreateHT10CustomerFeedbackTable extends Migration
             $table->integer("diversity")->nullable();
             $table->integer("quality")->nullable();
             $table->string("note")->nullable();
+            $table->bigInteger("create_by")->default(0);
+            $table->bigInteger("modify_by")->nullable();
             $table->timestamps();
         });
     }

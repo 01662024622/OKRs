@@ -24,11 +24,11 @@ class ReportApiController extends Controller
 
     public function reviewData()
     {
-        $data = Review::select("ht10_reviews.*", "apartments.name as apartment", "users.name as user")
-            ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
-            ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
-            ->orderBy('ht10-reviews.updated_at', 'desc')
-            ->where('ht10-reviews.create_by', Auth::id());
+        $data = Review::select("ht10_reviews.*", "ht20_apartments.name as apartment", "ht20_users.name as user")
+            ->leftJoin('ht20_users', 'ht20_users.id', '=', 'ht10_reviews.user_id')
+            ->join('ht20_apartments', 'ht10_reviews.apartment_id', '=', 'ht20_apartments.id')
+            ->orderBy('ht10_reviews.updated_at', 'desc')
+            ->where('ht10_reviews.create_by', Auth::id());
 
         // $products->user;
         return Datatables::of($data)
@@ -58,10 +58,10 @@ class ReportApiController extends Controller
     public function feedbackMeData()
     {
         $date = Carbon::now()->subDay(2);
-        $data = Review::select("ht10-reviews.*",
-            DB::raw("(CASE WHEN `ht10-reviews`.user_status = 1 THEN 1 WHEN `ht10-reviews`.created_at < '" . $date . "' THEN 2 WHEN `ht10-reviews`.user_status = -1 THEN -1 ELSE 0 END) as role"))
-            ->orderBy('ht10-reviews.updated_at', 'desc')
-            ->where('ht10-reviews.user_id', Auth::id());
+        $data = Review::select("ht10_reviews.*",
+            DB::raw("(CASE WHEN `ht10_reviews`.user_status = 1 THEN 1 WHEN `ht10_reviews`.created_at < '" . $date . "' THEN 2 WHEN `ht10_reviews`.user_status = -1 THEN -1 ELSE 0 END) as role"))
+            ->orderBy('ht10_reviews.updated_at', 'desc')
+            ->where('ht10_reviews.user_id', Auth::id());
 //        ->where('ht10-reviews.created_at',">",$date);
         // $products->user;
         return Datatables::of($data)
@@ -100,12 +100,12 @@ class ReportApiController extends Controller
         $apartment = Apartment::where('user_id', Auth::id())->where('status', 0)->get();
         if (sizeof($apartment) < 1) return null;
         $date = Carbon::now()->subDay(2);
-        $data = Review::select("ht10-reviews.*", "apartments.name as apartment", "users.name as user",
-            DB::raw("(CASE WHEN `ht10-reviews`.user_status = 1 THEN 1 WHEN `ht10-reviews`.created_at < '" . $date . "' THEN 2 WHEN `ht10-reviews`.user_status = -1 THEN -1 ELSE 0 END) as role"))
-            ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
-            ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
-            ->orderBy('ht10-reviews.updated_at', 'desc')
-            ->where("apartments.user_id", Auth::id());
+        $data = Review::select("ht10_reviews.*", "ht20_apartments.name as apartment", "ht20_users.name as user",
+            DB::raw("(CASE WHEN `ht10_reviews`.user_status = 1 THEN 1 WHEN `ht10_reviews`.created_at < '" . $date . "' THEN 2 WHEN `ht10_reviews`.user_status = -1 THEN -1 ELSE 0 END) as role"))
+            ->join('ht20_apartments', 'ht10_reviews.apartment_id', '=', 'ht20_apartments.id')
+            ->leftJoin('ht20_users', 'users.id', '=', 'ht10_reviews.user_id')
+            ->orderBy('ht10_reviews.updated_at', 'desc')
+            ->where("ht20_apartments.user_id", Auth::id());
         return Datatables::of($data)
             ->addColumn('action', function ($dt) {
                 if ($dt['role'] == 0) {
@@ -149,11 +149,11 @@ class ReportApiController extends Controller
         if (Auth::user()->role != "manager") {
             if (Auth::user()->role != "admin") return null;
         }
-        $data = Review::select("ht10-reviews.*", "apartments.name as apartment", "users.name as user")
-            ->join('apartments', 'ht10-reviews.apartment_id', '=', 'apartments.id')
-            ->leftJoin('users', 'users.id', '=', 'ht10-reviews.user_id')
-            ->orderBy('ht10-reviews.created_at', 'desc')
-            ->where('ht10-reviews.user_status', '<',0);
+        $data = Review::select("ht10_reviews.*", "ht20_apartments.name as apartment", "ht20_users.name as user")
+            ->join('ht20_apartments', 'ht10_reviews.apartment_id', '=', 'ht20_apartments.id')
+            ->leftJoin('ht20_users', 'ht20_users.id', '=', 'ht10_reviews.user_id')
+            ->orderBy('ht10_reviews.created_at', 'desc')
+            ->where('ht10_reviews.user_status', '<',0);
         return Datatables::of($data)
             ->addColumn('action', function ($dt) {
                 $html = '<select class="form-control" id="role_' . $dt['id'] . '" onchange="changeStatus(' . $dt['id'] . ')"';
@@ -191,13 +191,13 @@ class ReportApiController extends Controller
 
     public function feedbackWarehouseData()
     {
-        $data = FeedbackWarehouse::select(DB::raw("feedback_warehouse.id,feedback_warehouse.amount,feedback_warehouse.code_product,feedback_warehouse.type,GROUP_CONCAT(CONCAT('- ', improve_360.content) SEPARATOR '<br>') as content"))
-            ->leftjoin('feedback_warehouse_improve', 'feedback_warehouse.id', '=', 'feedback_warehouse_improve.feedback_warehouse_id')
-            ->leftjoin('improve_360', 'improve_360.id', '=', 'feedback_warehouse_improve.improve_360_id')
-            ->leftjoin('users', 'users.id', '=', 'feedback_warehouse.user_id')
-            ->orderBy('feedback_warehouse.updated_at', 'desc')
-            ->groupBy("feedback_warehouse.id", "feedback_warehouse.code_product", "feedback_warehouse.amount", "feedback_warehouse.type", "feedback_warehouse.created_at")
-            ->where("feedback_warehouse.user_id", Auth::id());
+        $data = FeedbackWarehouse::select(DB::raw("ht10_feedback_warehouse.id,ht10_feedback_warehouse.amount,ht10_feedback_warehouse.code_product,ht10_feedback_warehouse.type,GROUP_CONCAT(CONCAT('- ', ht10_improve_360.content) SEPARATOR '<br>') as content"))
+            ->leftjoin('ht10_feedback_warehouse_improve', 'ht10_feedback_warehouse.id', '=', 'ht10_feedback_warehouse_improve.feedback_warehouse_id')
+            ->leftjoin('ht10_improve_360', 'ht10_improve_360.id', '=', 'ht10_feedback_warehouse_improve.improve_360_id')
+            ->leftjoin('ht20_users', 'ht20_users.id', '=', 'ht10_feedback_warehouse.create_by')
+            ->orderBy('ht10_feedback_warehouse.updated_at', 'desc')
+            ->groupBy("ht10_feedback_warehouse.id", "ht10_feedback_warehouse.code_product", "ht10_feedback_warehouse.amount", "ht10_feedback_warehouse.type", "ht10_feedback_warehouse.created_at")
+            ->where("ht10_feedback_warehouse.create_by", Auth::id());
 
         return Datatables::of($data)
             ->editColumn('type', function ($dt) {
@@ -224,12 +224,12 @@ class ReportApiController extends Controller
     {
         $apartment_user = Apartment::select('id')->where('status', 0)->where('user_id', \Auth::id())->get()->pluck('id')->toArray();
         if (!(in_array(20, $apartment_user, true) || Auth::user()->role != "user")) return null;
-        $data = FeedbackWarehouse::select(DB::raw("feedback_warehouse.id,feedback_warehouse.amount,feedback_warehouse.code_product,feedback_warehouse.type,feedback_warehouse.created_at,GROUP_CONCAT(CONCAT('- ', improve_360.content) SEPARATOR '<br>') as content"))
-            ->leftjoin('feedback_warehouse_improve', 'feedback_warehouse.id', '=', 'feedback_warehouse_improve.feedback_warehouse_id')
-            ->leftjoin('improve_360', 'improve_360.id', '=', 'feedback_warehouse_improve.improve_360_id')
-            ->leftjoin('users', 'users.id', '=', 'feedback_warehouse.user_id')
-            ->orderBy('feedback_warehouse.updated_at', 'desc')
-            ->groupBy("id", "amount", "type", "code_product", "feedback_warehouse.created_at");
+        $data = FeedbackWarehouse::select(DB::raw("ht10_feedback_warehouse.id,ht10_feedback_warehouse.amount,ht10_feedback_warehouse.code_product,ht10_feedback_warehouse.type,ht10_feedback_warehouse.created_at,GROUP_CONCAT(CONCAT('- ', ht10_improve_360.content) SEPARATOR '<br>') as content"))
+            ->leftjoin('ht10_feedback_warehouse_improve', 'ht10_feedback_warehouse.id', '=', 'ht10_feedback_warehouse_improve.feedback_warehouse_id')
+            ->leftjoin('ht10_improve_360', 'ht10_improve_360.id', '=', 'ht10_feedback_warehouse_improve.improve_360_id')
+            ->leftjoin('ht20_users', 'ht20_users.id', '=', 'ht10_feedback_warehouse.create_by')
+            ->orderBy('ht10_feedback_warehouse.updated_at', 'desc')
+            ->groupBy("id", "amount", "type", "code_product", "ht10_feedback_warehouse.created_at");
 
         return Datatables::of($data)
             ->editColumn('type', function ($dt) {
@@ -254,7 +254,7 @@ class ReportApiController extends Controller
 
     public function feedbackPRData()
     {
-        $data = FeedbackPR::where("user_id", Auth::id())->orderBy('updated_at', 'desc')->get();
+        $data = FeedbackPR::where("create_by", Auth::id())->orderBy('updated_at', 'desc')->get();
 
         return Datatables::of($data)
             ->editColumn('created_at', function ($dt) {
@@ -293,8 +293,8 @@ class ReportApiController extends Controller
 
     public function feedbackCustomerDataManager()
     {
-        $data = Feedback::select("feedbacks.*", "users.name")
-            ->join("users", "feedbacks.user_id", "=", "users.id")
+        $data = Feedback::select("ht10_feedbacks.*", "ht20_users.name")
+            ->join("ht20_users", "ht10_feedbacks.user_id", "=", "ht20_users.id")
             ->orderBy('updated_at', 'desc')->get();
 
         return Datatables::of($data)

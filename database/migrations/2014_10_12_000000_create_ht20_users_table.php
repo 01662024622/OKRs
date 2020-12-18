@@ -19,7 +19,7 @@ class CreateHT20UsersTable extends Migration
             $table->string('avata')->default("/user.png");
             $table->string('tagname')->unique();
             $table->string('position');
-            $table->integer('apartment_id');
+            $table->integer('apartment_id')->nullable();
             $table->string('location')->nullable();
             $table->string('skype')->nullable();
             $table->string('email_htauto')->nullable();
@@ -32,6 +32,8 @@ class CreateHT20UsersTable extends Migration
             $table->string('authentication')->unique();
             $table->string('role')->default('blocker');
             $table->integer('status')->default(0);
+            $table->bigInteger('create_by')->default(0);
+            $table->bigInteger('modify_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

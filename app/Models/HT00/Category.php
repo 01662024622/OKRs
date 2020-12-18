@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'name', 'parent_id', 'status', 'slug',
+        'name', 'parent_id', 'status', 'slug', 'type', 'url', 'create_by', 'modify_by'
     ];
     public $fillable_store = [
-        'name', 'parent_id'
+        'name', 'parent_id', 'status', 'type', 'url'
     ];
     public $fillable_update = [
-        'name', 'parent_id'
+        'name', 'parent_id', 'status', 'type', 'url'
     ];
     protected $table = "ht00_categories";
 }

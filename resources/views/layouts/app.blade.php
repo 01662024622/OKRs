@@ -158,20 +158,20 @@
                             <span>Quản lý Feedback</span>
                         </a>
                     @endif
-                    <h6 class="collapse-header">Feed Đối Ngoại</h6>
-                    <a @if ($active=='pr') class="collapse-item active" @else class="collapse-item"
-                       @endif  href="/review/public/relationship/report">
-                        <i class="fa fa-user-plus"></i>
-                        <span>Feedback tôi tạo</span>
-                    </a>
+{{--                    <h6 class="collapse-header">Feed Đối Ngoại</h6>--}}
+{{--                    <a @if ($active=='pr') class="collapse-item active" @else class="collapse-item"--}}
+{{--                       @endif  href="/review/public/relationship/report">--}}
+{{--                        <i class="fa fa-user-plus"></i>--}}
+{{--                        <span>Feedback tôi tạo</span>--}}
+{{--                    </a>--}}
 
-                    @if(in_array(3,$apartment_user,true)|| Auth::user()->role!="user")
-                        <a @if ($active=='prmanager') class="collapse-item active" @else class="collapse-item"
-                           @endif  href="/review/public/relationship/manager/report">
-                            <i class="fa fa-user-plus"></i>
-                            <span>Quản lý Feedback</span>
-                        </a>
-                    @endif
+{{--                    @if(in_array(3,$apartment_user,true)|| Auth::user()->role!="user")--}}
+{{--                        <a @if ($active=='prmanager') class="collapse-item active" @else class="collapse-item"--}}
+{{--                           @endif  href="/review/public/relationship/manager/report">--}}
+{{--                            <i class="fa fa-user-plus"></i>--}}
+{{--                            <span>Quản lý Feedback</span>--}}
+{{--                        </a>--}}
+{{--                    @endif--}}
                     <h6 class="collapse-header">Feed của khách hàng</h6>
                     <a @if ($active=='feedback_customer') class="collapse-item active" @else class="collapse-item"
                        @endif  href="/review/feedback/customer/report">

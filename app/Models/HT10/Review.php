@@ -11,12 +11,10 @@ class Review extends Model
         'task_id', 'browser_task_id', 'modify_by'
     ];
     protected $fillable_store = [
-        'name', 'type', 'apartment_id', 'user_id', 'create_by', 'content', 'image', 'confirm', 'status', 'user_status',
-        'task_id', 'browser_task_id'
+        'name', 'type', 'apartment_id', 'user_id', 'content', 'image', 'confirm', 'status', 'user_status'
     ];
     protected $fillable_update = [
-        'name', 'type', 'apartment_id', 'user_id', 'create_by', 'content', 'image', 'confirm', 'user_status',
-        'task_id', 'browser_task_id'
+        'name', 'type', 'apartment_id', 'user_id', 'content', 'image', 'confirm', 'user_status'
     ];
     protected $table = "ht10_reviews";
 }

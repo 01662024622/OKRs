@@ -17,9 +17,11 @@ class CreateHT20ApartmentsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('code')->unique();
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->nullable();
             $table->string('description')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('create_by')->default(0);
+            $table->integer('modify_by')->nullable();
             $table->timestamps();
         });
     }

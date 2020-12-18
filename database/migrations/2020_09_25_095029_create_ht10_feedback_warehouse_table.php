@@ -15,9 +15,11 @@ class CreateHT10FeedbackWarehouseTable extends Migration
     {
         Schema::create('ht10_feedback_warehouse', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("user_id");
             $table->string("code_product");
+            $table->string("type");
             $table->integer("amount");
+            $table->bigInteger("create_by")->default(0);
+            $table->bigInteger("modify_by")->nullable();
             $table->timestamps();
         });
     }

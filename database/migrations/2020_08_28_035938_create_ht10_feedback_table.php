@@ -18,8 +18,9 @@ class CreateHT10FeedbackTable extends Migration
             $table->string("order");
             $table->string("content");
             $table->string("note")->nullable();
-            $table->bigInteger("user_id");
             $table->string("option")->nullable();
+            $table->bigInteger("create_by")->default(0);
+            $table->bigInteger("modify_by")->nullable();
             $table->timestamps();
         });
     }

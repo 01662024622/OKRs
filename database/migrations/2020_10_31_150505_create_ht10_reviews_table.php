@@ -17,13 +17,18 @@ class CreateHt10ReviewsTable extends Migration
             $table->id();
             $table->string("type")->default("attitude");
             $table->string("name")->nullable();
-            $table->bigInteger("apartment_id");
-            $table->bigInteger("user_id")->default(0);
-            $table->bigInteger("create_by");
-            $table->string("content")->nullable();
+            $table->string("content",2000)->nullable();
             $table->string("image")->nullable();
             $table->string("option")->nullable();
+            $table->string("confirm",2000)->nullable();
+            $table->string("task_id")->nullable();
+            $table->string("browser_task_id")->nullable();
+            $table->bigInteger("apartment_id");
+            $table->bigInteger("user_id")->default(0);
+            $table->bigInteger("create_by")->default(0);
+            $table->bigInteger("modify_by")->nullable();
             $table->integer("status")->nullable();
+            $table->integer("user_status")->nullable();
             $table->timestamps();
         });
     }
