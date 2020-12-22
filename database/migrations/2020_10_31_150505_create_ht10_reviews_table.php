@@ -28,7 +28,7 @@ class CreateHt10ReviewsTable extends Migration
             $table->bigInteger("create_by")->default(0);
             $table->bigInteger("modify_by")->nullable();
             $table->integer("status")->nullable();
-            $table->integer("user_status")->nullable();
+            $table->integer("user_status")->default(0);
             $table->timestamps();
         });
     }

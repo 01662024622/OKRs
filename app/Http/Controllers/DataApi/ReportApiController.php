@@ -280,7 +280,7 @@ class ReportApiController extends Controller
 
     public function feedbackCustomerData()
     {
-        $data = Feedback::where("user_id", Auth::id())->orderBy('updated_at', 'desc')->get();
+        $data = Feedback::where("create_by", Auth::id())->orderBy('updated_at', 'desc')->get();
 
         return Datatables::of($data)
             ->editColumn('created_at', function ($dt) {
