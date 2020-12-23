@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHT00CategoriesTable extends Migration
+class CreateHt00PostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateHT00CategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ht00_categories', function (Blueprint $table) {
+        Schema::create('ht00_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
             $table->string('slug');
-            $table->bigInteger('parent_id')->default(0);
-            $table->integer('type')->default(0);
             $table->string('url')->nullable();
+            $table->string('content')->nullable();
+            $table->string('embed');
             $table->integer('role')->default(0);
-            $table->integer('sort')->default(999);
             $table->integer('status')->default(0);
             $table->bigInteger('create_by')->default(0);
             $table->bigInteger('modify_by')->nullable();
@@ -36,6 +35,6 @@ class CreateHT00CategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ht00_categories');
+        Schema::dropIfExists('ht00_posts');
     }
 }

@@ -19,12 +19,12 @@ class CategoryController extends ResouceController
     }
 
 	public function store(Request $request) {
-        if ($request->has("id") && $request->id!="") {
-            $data=$request->only(['id', 'name', 'parent_id']);
-        }else{
-            $data=$request->only(['name', 'parent_id']);
+        if (!$request->has("id")){
+            $data['slug']=Str::slug((string)$request->only("title"), '-').time();
+            if (!$request->has("url")){
+                $data['url']="categories/".$data['slug'];
+            }
         }
-		$data['slug']=Str::slug($data['name'], '-').time();
 		return parent::storeRequest($request,$data);
 	}
 

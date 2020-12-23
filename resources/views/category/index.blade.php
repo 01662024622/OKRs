@@ -84,6 +84,19 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="type" value="1" checked>Danh mục chính
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="type" value="2">Danh mục nhóm
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#all">Tổng thể</a>
