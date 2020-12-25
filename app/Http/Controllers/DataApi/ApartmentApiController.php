@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\DataApi;
 
+use App\Models\HT00\CategoryApartment;
+use App\Models\HT00\CategoryUser;
 use App\Models\HT20\Apartment;
 use App\Http\Controllers\Controller;
 use App\Models\HT20\User;
@@ -40,5 +42,14 @@ class ApartmentApiController extends Controller
             ->setRowId('data-{{$id}}')
             ->rawColumns(['action'])
             ->make(true);
+    }
+    public function getListApartmentCategory(Request $request,$query){
+        $listUser= (array)$request->input('apartments');
+
+        return Apartment::select('name','id')->where('status',0)->whereNotIn('id',$listUser)->where('name','LIKE','%'.$query.'%')->get();
+    }
+    public function getListRoleApartmentCategory($id){
+        return CategoryApartment::join('ht20_apartments','ht20_apartments.id','=','ht00_category_apartment.apartment_id')
+            ->where('category_id',$id)->get(['ht20_apartments.id','ht20_apartments.name','ht00_category_apartment.role']);
     }
 }

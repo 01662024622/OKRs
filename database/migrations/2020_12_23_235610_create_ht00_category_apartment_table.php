@@ -15,7 +15,7 @@ class CreateHt00CategoryApartmentTable extends Migration
     {
         Schema::create('ht00_category_apartment', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->bigInteger('apartment_id');
             $table->bigInteger('category_id');
             $table->bigInteger('role');
             $table->bigInteger('create_by')->default(0);

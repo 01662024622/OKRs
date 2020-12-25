@@ -70,17 +70,16 @@
                 </div>
 
                 <!-- Modal body -->
-                <form>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label class="form-label" for="exampleInputEmail1">URL</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                   placeholder="Nhập url">
-                        </div>
                         <div class="form-group">
                             <label class="form-label" for="exampleInputPassword1">Nhãn Điều Hướng</label>
                             <input type="text" class="form-control" id="exampleInputPassword1"
                                    placeholder="Nhập nhãn điều hướng">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="exampleInputEmail1">URL</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                   placeholder="Nhập url">
                         </div>
 
                         <div class="form-group">
@@ -135,29 +134,21 @@
                                 <div id="apartment" class="container tab-pane fade"><br>
                                     <div class="row">
                                         <div class="col col-6">
-                                            <input type="text" name="apartment_find" id="apartment_find" style="width: 150px;" maxlength="30"> <button>Tìm kiếm</button>
+                                            <input type="text" name="apartment_find" id="apartment_find_text" style="width: 150px;" maxlength="30"> <button id="apartment_find">Tìm kiếm</button>
+                                            <br>
                                             <br>
                                             <p>Kết quả tìm kiếm:</p>
-                                            <br>
-                                            <select multiple="multiple" id="multiple_apartment" style="height:160px; width: 210px;">
+                                            <select multiple="multiple" id="multiple_apartment_select" style="height:160px; width: 210px;">
 
                                             </select>
+
+                                            <button id="apartment_select">Chọn</button>
                                         </div>
                                         <div class="col col-6">
-                                            <table style="width:100%">
+                                            <table style="width:100%" id="apartment_role_table">
                                                 <tr>
-                                                    <th>Vai trò</th>
-                                                    <th>Cấp phép</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Nhân Viên</td>
-                                                    <td>
-                                                        <select class="role-select" name="role" id="role">
-                                                            <option value="0">mặc định</option>
-                                                            <option value="1" style="font-weight: 700; color: #3ED317">cho phép</option>
-                                                            <option value="2" style="font-weight: 700; color: #AA0000">khóa tất cả</option>
-                                                        </select>
-                                                    </td>
+                                                    <th>Phòng ban</th>
+                                                    <th>Quyền hạn</th>
                                                 </tr>
                                             </table>
                                         </div>
@@ -166,29 +157,20 @@
                                 <div id="staff" class="container tab-pane fade"><br>
                                     <div class="row">
                                         <div class="col col-6">
-                                            <input type="text" name="apartment_find" id="apartment_find" style="width: 150px;" maxlength="30"> <button>Tìm kiếm</button>
+                                            <input type="text" name="apartment_find" id="staff_find_text" style="width: 150px;" maxlength="30"> <button id="staff_find">Tìm kiếm</button>
                                             <br>
                                             <p>Kết quả tìm kiếm:</p>
                                             <br>
-                                            <select multiple="multiple" id="multiple_apartment" style="height:160px; width: 210px;">
+                                            <select multiple="multiple" id="multiple_staff_select" style="height:160px; width: 210px;">
 
                                             </select>
+                                            <button id="staff_select">Chọn</button>
                                         </div>
                                         <div class="col col-6">
-                                            <table style="width:100%">
+                                            <table style="width:100%" id="staff_role_table">
                                                 <tr>
-                                                    <th>Vai trò</th>
-                                                    <th>Cấp phép</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Nhân Viên</td>
-                                                    <td>
-                                                        <select class="role-select" name="role" id="role">
-                                                            <option value="0">mặc định</option>
-                                                            <option value="1" style="font-weight: 700; color: #3ED317">cho phép</option>
-                                                            <option value="2" style="font-weight: 700; color: #AA0000">khóa tất cả</option>
-                                                        </select>
-                                                    </td>
+                                                    <th>Tên nhân viên</th>
+                                                    <th>Quyền hạn</th>
                                                 </tr>
                                             </table>
                                         </div>
@@ -204,7 +186,6 @@
                         <button type="button" class="btn btn-success">Lưu</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
                     </div>
-                </form>
 
             </div>
         </div>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\DataApi;
 
 use App\Http\Controllers\Controller;
+use App\Models\HT00\CategoryUser;
+use App\Models\HT00\PostUser;
+use App\Models\HT20\Apartment;
 use App\Models\HT20\User;
 use Carbon\Carbon;
 use DB;
@@ -70,4 +73,14 @@ class UserApiController extends Controller
         $data = User::find($id)->update(array('role' => $request->role));
         return $data;
     }
+    public function getListUserCategory(Request $request,$query){
+        $listUser= (array)$request->input('users');
+
+        return User::select('name','id')->where('status',0)->whereNotIn('id',$listUser)->where('name','LIKE','%'.$query.'%')->get();
+    }
+    public function getListRoleUserCategory($id){
+        return CategoryUser::join('ht20_users','ht20_users.id','=','ht00_category_user.user_id')
+            ->where('category_id',$id)->get(['ht20_users.id','ht20_users.name','ht00_category_user.role']);
+    }
+
 }

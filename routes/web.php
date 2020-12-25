@@ -83,6 +83,12 @@ Route::group(['prefix' => 'api/v1'], function() {
     Route::get('report/review/feedback/public/relationship/manager/table', 'DataApi\ReportApiController@feedbackPRDataManager')->name('report_feedback_pr_manager.api.data');
     Route::get('report/review/feedback/customer/table', 'DataApi\ReportApiController@feedbackCustomerData')->name('report_feedback_customer.api.data');
     Route::get('report/review/feedback/customer/manager/table', 'DataApi\ReportApiController@feedbackCustomerDataManager')->name('report_feedback_customer_manager.api.data');
+//    HT00
+    Route::get('users/category/search/{query}', 'DataApi\UserApiController@getListUserCategory')->name('get_list_user_category.api.data');
+    Route::get('users/category/role/{id}', 'DataApi\UserApiController@getListRoleUserCategory')->name('get_list_role_user_category.api.data');
+
+    Route::get('apartments/category/search/{query}', 'DataApi\ApartmentApiController@getListApartmentCategory')->name('get_list_apartment_category.api.data');
+    Route::get('apartments/category/role/{id}', 'DataApi\ApartmentApiController@getListRoleApartmentCategory')->name('get_list_apartment_category.api.data');
 
 });
 
