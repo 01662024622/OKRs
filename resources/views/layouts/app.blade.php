@@ -23,6 +23,9 @@
 
 </head>
 <body id="page-top">
+<div id="load_page">
+    <div class="loader"></div>
+</div>
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->

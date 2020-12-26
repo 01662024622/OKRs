@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DataApi;
 
 use App\Models\HT00\Category;
 use App\Http\Controllers\Controller;
+use App\Models\HT20\Apartment;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

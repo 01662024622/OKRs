@@ -49,6 +49,7 @@ class ApartmentApiController extends Controller
         return Apartment::select('name','id')->where('status',0)->whereNotIn('id',$listUser)->where('name','LIKE','%'.$query.'%')->get();
     }
     public function getListRoleApartmentCategory($id){
+//        return $id;
         return CategoryApartment::join('ht20_apartments','ht20_apartments.id','=','ht00_category_apartment.apartment_id')
             ->where('category_id',$id)->get(['ht20_apartments.id','ht20_apartments.name','ht00_category_apartment.role']);
     }

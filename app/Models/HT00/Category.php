@@ -16,4 +16,8 @@ class Category extends Model
         'name', 'parent_id', 'status', 'type', 'url'
     ];
     protected $table = "ht00_categories";
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id')->orderBy('sort');
+    }
 }

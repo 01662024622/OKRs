@@ -4,6 +4,7 @@
 namespace App\Services\Impl\HT00;
 
 
+use App\Models\HT00\Category;
 use App\Repositories\HT00\CategoryRepository;
 use App\Services\AbstractService;
 use App\Services\HT00\CategoryService;
@@ -16,5 +17,12 @@ class CategoryServiceImpl extends AbstractService implements CategoryService
     {
         parent::__construct($repository);
     }
+    public function all(){
 
+        $categories= Category::where('status',0)->where('type','>',0)->get();
+        foreach ($categories as $category){
+            $category->children;
+        }
+        return $categories;
+    }
 }

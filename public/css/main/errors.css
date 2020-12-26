@@ -35,3 +35,37 @@
       width: 100%;
       height: auto;
   }
+  .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #000066;
+      border-bottom: 16px solid #000066;
+      width: 80px;
+      height: 80px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      margin-left: 48%;
+      margin-top: 45vh;
+  }
+
+  @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+  }
+  #load_page{
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background: #2d2e33;
+      z-index: 9999999;
+      opacity: 0.9;
+      display: none;
+  }

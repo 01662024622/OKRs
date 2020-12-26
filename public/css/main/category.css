@@ -86,7 +86,7 @@
     display: none;
 }
 .form-control{
-    font-size: 0.7em;
+    font-size: 1em;
     padding: .275rem .65rem;
     border-radius: 0;
 }
@@ -107,4 +107,10 @@
 }
 .form-label{
     font-size: 0.8em;
+}
+#radio{
+    display: none;
+}
+.role-select{
+    width: 100px;
 }
