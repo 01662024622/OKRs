@@ -1,8 +1,10 @@
 $(function () {
     $("#sortable").sortable({
-        placeholder: "ui-state-highlight"
+        placeholder: "ui-state-highlight",
+        items: "li:not(.disable-sort-item)"
     });
     $("#sortable").disableSelection();
+    $(".disable-sort-item").disableSelection();
     $("#sortable_sub").sortable({
         placeholder: "ui-state-highlight",
         start: function (e, ui) {
@@ -30,6 +32,8 @@ $('#staff_find_text').on('keyup', function (event) {
 })
 
 function searchStaff() {
+
+    $('#load_page').show()
     var userQuery = '';
     if (users.length > 0) {
         userQuery = '?users[]=' + users.join('&users[]=');
@@ -44,6 +48,8 @@ function searchStaff() {
                 user_find[response[i]['id']] = response[i];
             }
             $('#multiple_staff_select').html(html);
+
+            $('#load_page').hide()
         },
         error: function (xhr, ajaxOptions, thrownError) {
             toastr.error(thrownError);
@@ -89,6 +95,7 @@ var apartment_add = [];
 var apartments = [];
 
 function searchApartment() {
+    $('#load_page').show()
     var apartmentQuery = '';
     if (apartments.length > 0) {
         apartmentQuery = '?apartments[]=' + apartments.join('&apartments[]=');
@@ -103,6 +110,8 @@ function searchApartment() {
                 apartment_find[response[i]['id']] = response[i];
             }
             $('#multiple_apartment_select').html(html);
+
+            $('#load_page').hide()
         },
         error: function (xhr, ajaxOptions, thrownError) {
             toastr.error(thrownError);
@@ -120,7 +129,7 @@ $("#apartment_select").on('click', function () {
             apartment_table = apartment_table + `<tr>
                     <td>` + apartment_find[element]['name'] + `</td>
                     <td>
-                        <select class="role-select" name="role" id="apartment_role_`+apartment_find[element]['id']+`">
+                        <select class="role-select" name="role" id="apartment_role_` + apartment_find[element]['id'] + `">
                             <option value="0" >mặc định</option>
                             <option value="1" style="font-weight: 700; color: #3ED317" >Cho phép</option>
                             <option value="2" style="font-weight: 700; color: #AA0000" >Chặn</option>
@@ -141,6 +150,7 @@ function getInfo(id) {
     apartment_add = []
     users = []
     user_add = []
+    apartment_find = []
     $('#load_page').show()
     $.ajax({
         type: "GET",
@@ -163,6 +173,7 @@ function getInfo(id) {
 }
 
 $('#apartment_toggle').on('click', function () {
+    if ($('#eid').val() == '') return
     $('#load_page').show()
     $.ajax({
         type: "GET",
@@ -177,7 +188,7 @@ $('#apartment_toggle').on('click', function () {
                 apartment_table = apartment_table + `<tr>
                     <td>` + response[i]['name'] + `</td>
                     <td>
-                        <select class="role-select" name="role" id="apartment_role_`+response[i]['id']+`">
+                        <select class="role-select" name="role" id="apartment_role_` + response[i]['id'] + `">
                             <option value="0" `
 
                 if (response[i]['role'] == 0) apartment_table = apartment_table + 'selected';
@@ -209,6 +220,7 @@ $('#apartment_toggle').on('click', function () {
 })
 
 $('#staff_toggle').on('click', function () {
+    if ($('#eid').val() == '') return
     $('#load_page').show()
     $.ajax({
         type: "GET",
@@ -223,7 +235,7 @@ $('#staff_toggle').on('click', function () {
                 users_table = users_table + `<tr>
                     <td>` + response[i]['name'] + `</td>
                     <td>
-                        <select class="role-select" name="role" id="apartment_role_`+response[i]['id']+`">
+                        <select class="role-select" name="role" id="apartment_role_` + response[i]['id'] + `">
                             <option value="0" `
 
                 if (response[i]['role'] == 0) users_table = users_table + 'selected';
@@ -252,6 +264,33 @@ $('#staff_toggle').on('click', function () {
         }
     });
 })
+
+function add_new() {
+    $('#eid').val('');
+    $('#title').val('');
+    $('#url').val('');
+    $("#radio_1").attr('checked', 'checked');
+    $('#radio').show();
+    $('#role').val(0);
+    apartments = [];
+    apartment_add = [];
+    users = [];
+    user_add = [];
+    var users_table = `<tr>
+                                                <th>Nhân viên</th>
+                                                <th>Quyền hạn</th>
+                                            </tr>`;
+
+    $('#staff_role_table').html(users_table);
+    var apartment_table = `<tr>
+                                                <th>Phòng ban</th>
+                                                <th>Quyền hạn</th>
+                                            </tr>`;
+
+    $('#apartment_role_table').html(apartment_table);
+
+    $('#nav_active')[0].click();
+}
 
 // $.ajax({
 //     type: "GET",

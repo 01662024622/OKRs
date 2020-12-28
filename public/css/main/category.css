@@ -114,3 +114,15 @@
 .role-select{
     width: 100px;
 }
+.disable-sort-item button{
+    font-size: 50px;
+    margin-left: 40%;
+    margin-top: 40%;
+    border: none;
+    background: none;
+    outline:none;
+}
+/*.disable-sort-item {*/
+/*background: none;*/
+/*    border: none;*/
+/*}*/

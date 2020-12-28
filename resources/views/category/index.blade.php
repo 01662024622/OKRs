@@ -43,7 +43,11 @@
         <li class="ui-state-default">9</li>
         <li class="ui-state-default">10</li>
         <li class="ui-state-default">11</li>
-        <li class="ui-state-default">12</li>
+        <li class="ui-state-default disable-sort-item">
+            <button onclick="add_new()" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </li>
     </ul>
     <button type="button" class="btn btn-primary">
         Open modal
