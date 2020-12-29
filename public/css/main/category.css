@@ -15,14 +15,14 @@
     text-align: left;
 }
 
-#sortable_sub {
+.sortable_sub {
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-#sortable_sub > li {
+.sortable_sub > li {
     margin: 0 0 3px 5px;
     padding: 0.4em;
     padding-left: 0.5em;
@@ -32,7 +32,7 @@
     padding-right: 0;
 }
 
-#sortable_sub > li > span {
+.sortable_sub > li > span {
     position: absolute;
 }
 

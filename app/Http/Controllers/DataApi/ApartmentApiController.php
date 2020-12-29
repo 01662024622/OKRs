@@ -51,6 +51,6 @@ class ApartmentApiController extends Controller
     public function getListRoleApartmentCategory($id){
 //        return $id;
         return CategoryApartment::join('ht20_apartments','ht20_apartments.id','=','ht00_category_apartment.apartment_id')
-            ->where('category_id',$id)->get(['ht20_apartments.id','ht20_apartments.name','ht00_category_apartment.role']);
+            ->where('category_id',$id)->get(['ht20_apartments.id','ht00_category_apartment.id as ca_id','ht20_apartments.name','ht00_category_apartment.role']);
     }
 }

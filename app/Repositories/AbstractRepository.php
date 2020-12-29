@@ -24,13 +24,14 @@ abstract class AbstractRepository implements RepositoryInterface
 
     public function create(Request $data,array $arr)
     {
-//      return $data;
         $auth = Auth::id();
         try {
             if ($data->has("id")) {
                 $update=$data->only($this->model->getUpdate());
                 $update['modify_by']=$auth;
-                return $this->model->find($data->only("id"))->update(array_merge($update,$arr));
+                $entity= $this->model->find($data->id);
+                $entity->update(array_merge($update,$arr));
+                return $entity;
             }
             $create=$data->only($this->model->getStore());
             $create['create_by']=$auth;

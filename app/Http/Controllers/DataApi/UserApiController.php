@@ -80,7 +80,7 @@ class UserApiController extends Controller
     }
     public function getListRoleUserCategory($id){
         return CategoryUser::join('ht20_users','ht20_users.id','=','ht00_category_user.user_id')
-            ->where('category_id',$id)->get(['ht20_users.id','ht20_users.name','ht00_category_user.role']);
+            ->where('category_id',$id)->get(['ht20_users.id','ht00_category_user.id as ca_id','ht20_users.name','ht00_category_user.role']);
     }
 
 }
