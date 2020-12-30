@@ -4,8 +4,10 @@ namespace App\Http\Controllers\DataApi;
 
 use App\Models\HT00\Category;
 use App\Http\Controllers\Controller;
+use App\Models\HT00\CategoryApartment;
 use App\Models\HT20\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class CategoryApiController extends Controller
@@ -14,6 +16,7 @@ class CategoryApiController extends Controller
     {
         $this->middleware('admin');
     }
+
     public function anyData(Request $request)
     {
 
@@ -43,5 +46,24 @@ class CategoryApiController extends Controller
             ->setRowId('data-{{$id}}')
             ->rawColumns(['action'])
             ->make(true);
+    }
+
+    public function saveSort(Request $request)
+    {
+        if ($request->has('categories')) {
+            $categories=$request->categories;
+            foreach ($categories as $category) {
+                $arr = explode("_", $category);
+                $data['sort'] = (int)$arr[0];
+                $data['modify_by'] = Auth::id();
+                Category::find($arr[1])->update($data);
+            }
+            return true;
+        }
+        return response()
+            ->json([
+                'code' => 502,
+                'message' => 'Dữ liệu không hợp lệ!',
+            ], 502);
     }
 }

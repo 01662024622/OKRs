@@ -182,7 +182,7 @@ function getInfo(id) {
 
 $('#apartment_toggle').on('click', function () {
     if ($('#eid').val() == '') return
-    if (apartments.length>0) return
+    if (apartments.length > 0) return
     $('#load_page').show()
     $.ajax({
         type: "GET",
@@ -231,7 +231,7 @@ $('#apartment_toggle').on('click', function () {
 
 $('#staff_toggle').on('click', function () {
     if ($('#eid').val() == '') return
-    if (users.length>0) return
+    if (users.length > 0) return
     $('#load_page').show()
     $.ajax({
         type: "GET",
@@ -276,6 +276,37 @@ $('#staff_toggle').on('click', function () {
         }
     });
 })
+
+function add_new_sub(id) {
+    $('#eid').val('');
+    $('#title').val('');
+    $('#url').val('');
+    $("#radio_1").attr('checked', 'checked');
+    $('#radio').hide();
+    $('#url_group').show();
+    $('#role').val(0);
+    $('#parent_id').val(id);
+    apartments = [];
+    apartment_add = [];
+    apartment_update = [];
+    users = [];
+    user_add = [];
+    user_update = [];
+    var users_table = `<tr>
+                                                <th>Nhân viên</th>
+                                                <th>Quyền hạn</th>
+                                            </tr>`;
+
+    $('#staff_role_table').html(users_table);
+    var apartment_table = `<tr>
+                                                <th>Phòng ban</th>
+                                                <th>Quyền hạn</th>
+                                            </tr>`;
+
+    $('#apartment_role_table').html(apartment_table);
+
+    $('#nav_active')[0].click();
+}
 
 function add_new() {
     $('#eid').val('');
@@ -326,7 +357,7 @@ $("#save").on('click', function () {
     formData.append('parent_id', $('#parent_id').val());
 
     formData.append('role', $('#role').val());
-    if ($('#parent_id').val()==0){
+    if ($('#parent_id').val() == 0) {
         formData.append('type', $('input[name=type]:checked').val());
     }
     if (user_add.length > 0) {
@@ -368,31 +399,50 @@ $("#save").on('click', function () {
                 }
             }, 1000);
             $("#myModal").modal('toggle');
-            var type='';
-            if (response['type']==2) type='style="background-color: #ccff99"';
+            var type = '';
+            if (response['type'] == 2) type = 'style="background-color: #ccff99"';
             if ($('#eid').val() == '' && $('#parent_id').val() == 0) {
-                var li = `<li class="ui-state-default" data-value="`+response['id']+`">
-                <div class="main-header"`+type+`>
-                    <p class="main-title header" title="`+response['title']+`">`+response['title']+`</p>
-                    <button class='btn menu-icon' data-toggle="modal" data-target="#myModal" onclick="getInfo(`+response['id']+`)">
+                var li = `<li class="ui-state-default" data-value="` + response['id'] + `">
+                <div class="main-header"` + type + `>
+                    <p class="main-title header" title="` + response['title'] + `">` + response['title'] + `</p>
+                    <button class='btn menu-icon' data-toggle="modal" data-target="#myModal" onclick="getInfo(` + response['id'] + `)">
                         <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div class="main-content">
-                    <ul id="sortable_sub_`+response['id']+`" class="sortable_sub">
-<!--                            <li class="ui-state-default" data-value="{{$sub->id}}">-->
-<!--                                <div class="sub-header">-->
-<!--                                    <p class="sub-title header" title="{{$sub->title}}">{{$sub->title}}</p>-->
-<!--                                    <button class='btn menu-icon' data-toggle="modal" data-target="#myModal" onclick="getInfo({{$sub->id}})">-->
-<!--                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>-->
-<!--                                    </button>-->
-<!--                                </div>-->
-<!--                            </li>-->
+                    <ul id="sortable_sub_` + response['id'] + `" class="sortable_sub">
+                         <li class="ui-state-default disable-sub-sort-item" id="add_button_category_{{$category->id}}">
+                                <div class="sub-header">
+                                    <button onclick="add_new_sub(`+response['id']+`)" data-toggle="modal" data-target="#myModal">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </li>
                     </ul>
                 </div>
 
             </li>`;
-            $('#add_button_category').before(li);
+                $('#add_button_category').before(li);
+            }
+            if ($('#eid').val() == '' && $('#parent_id').val() > 0) {
+                var li = `<li class="ui-state-default" data-value="`+response['id']+`">
+                                <div class="sub-header">
+                                    <p class="sub-title header" title="`+response['title']+`">`+response['title']+`</p>
+                                    <button class='btn menu-icon' data-toggle="modal" data-target="#myModal" onclick="getInfo(`+response['id']+`)">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </li>`;
+                $('#add_button_category_'+$('#parent_id').val()).before(li);
+            }
+            if ($('#eid').val() != ''){
+                if (response['type']==2){
+                    $('#category_'+response['id']).find('div.container-header:first').addClass('main-header-color')
+                }
+                if (response['type']==1){
+                    $('#category_'+response['id']).find('div.container-header:first').removeClass('main-header-color')
+                }
+                $('#category_'+response['id']).find('p.header:first').text(response['title'])
             }
             $('#load_page').hide();
         }, error: function (xhr, ajaxOptions, thrownError) {
@@ -401,14 +451,31 @@ $("#save").on('click', function () {
     });
 });
 
-// $.ajax({
-//     type: "GET",
-//     url: "/api/v1/users/role/"+category_id+userQuery,
-//     success: function(response)
-//     {
-//
-//     },
-//     error: function (xhr, ajaxOptions, thrownError) {
-//         toastr.error(thrownError);
-//     }
-// });
+$('#save_change').on('click',function (){
+    $('#load_page').show();
+    var formData = new FormData();
+    $('#sortable').children('li').each(function (index, element) {
+        if ($(element).data('value')==undefined) return ;
+        formData.append('categories[]', index + '_' + $(element).data('value'));
+        $(element).find('li').each(function (ind, ele) {
+            if ($(ele).data('value')==undefined) return ;
+            formData.append('categories[]', ind + '_' + $(ele).data('value'));
+        })
+    })
+    $.ajax({
+        url: "/api/status/categories/sort",
+        type: "POST",
+        data: formData,
+        dataType: 'json',
+        async: false,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response)
+            toastr.success('Cập nhật thành công!');
+            $('#load_page').hide();
+        }, error: function (xhr, ajaxOptions, thrownError) {
+            toastr.error(thrownError);
+        },
+    });
+})

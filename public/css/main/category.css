@@ -55,7 +55,12 @@
 .sub-header{
     position: relative;
     font-weight: 500;
-
+    text-align: center;
+}
+.sub-header>button{
+    border: none;
+    background: none;
+    outline: none;
 }
 .main-content{
     overflow-y: auto;
@@ -121,6 +126,9 @@
     border: none;
     background: none;
     outline:none;
+}
+.main-header-color{
+    background-color: #ccff99
 }
 /*.disable-sort-item {*/
 /*background: none;*/

@@ -64,7 +64,7 @@ Route::get('/review/feedback/customer/manager/report', 'HT10\ReviewViewControlle
 
 Route::resource('categories', 'HT00\CategoryController');
 
-//Route::get('/category/{slug}', 'HomeController@category');
+Route::get('/tests', 'HT00\CategoryController@tests');
 // Route::get('/profile', 'CustomerController@profile');
 
 // Get data Table group
@@ -98,6 +98,7 @@ Route::group(['prefix' => 'api/status'], function() {
 	Route::get('categories/{id}', 'status\StatusController@categories')->name('categories.api.status');
 	Route::post('users/{id}', 'DataApi\UserApiController@status')->name('users.api.status');
 	Route::post('review/{id}', 'DataApi\ReportApiController@status')->name('review.api.status');
+	Route::post('categories/sort', 'DataApi\CategoryApiController@saveSort')->name('categories.api.sort');
 
 });
 
